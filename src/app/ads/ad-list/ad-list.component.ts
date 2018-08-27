@@ -9,22 +9,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './ad-list.component.html',
   styleUrls: ['./ad-list.component.css']
 })
-export class AdListComponent implements OnInit, OnDestroy {
+export class AdListComponent implements OnInit {
   ads: Ads[];
   subsctiption: Subscription;
-  constructor(private adsService: AdsService) { }
+  constructor(public adsService: AdsService) { }
 
   ngOnInit() {
-    this.subsctiption = this.adsService.adsChanged
-    .subscribe(
-      (ads: Ads[]) => {
-        this.ads = ads;
-      }
-    );
-    this.ads = this.adsService.getAds();
-    console.log(this.ads);
-  }
-  ngOnDestroy() {
-    this.subsctiption.unsubscribe();
+
   }
 }

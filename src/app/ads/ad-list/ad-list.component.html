@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row">
+    <app-controll-ads></app-controll-ads>
+  </div>
+  <div class="row">
       <div class="col-xs-12">
           <app-ad-item
-          *ngFor="let adsEl of ads; let i = index" 
+          *ngFor="let adsEl of (adsService.ads$ | async); let i = index" 
           [ads]='adsEl'
           [index]='i'></app-ad-item>
         </div>

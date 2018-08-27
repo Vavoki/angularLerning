@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../api.service';
 
 @Component({
   selector: 'app-ads',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent implements OnInit {
-
-  constructor() { }
+  data;
+  constructor(private apiservice: DataService) { }
 
   ngOnInit() {
+    this.data = this.apiservice.getUsers();
+    console.log('DATA', this.data.value);
   }
 
 }

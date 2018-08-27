@@ -1,28 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Ads } from './ads.model';
-import { Contact } from '../shared/contact.model';
-import { Img } from '../shared/img.model';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { ads } from './ads-ititial';
 
 @Injectable()
 export class AdsService {
-  adsChanged = new Subject<Ads[]>();
-  private ads: Ads[] = [
-    new Ads('PS4', 7000, 'desctiption', [
-      new Contact('Vlad', '+380972935418', '23143s111s@gmail.com')
-    ],
-    [
-      new Img('https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$'),
-      new Img('https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg')
-    ]),
-    new Ads('PS4 SLIM', 5000, 'desctiption', [
-      new Contact('Vlad', '+380972935418', '23143s111s@gmail.com')
-    ],
-    [
-      new Img('https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$'),
-      new Img('https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg')
-    ])
-  ];
+  private ads: Ads[] = ads;
+  adsChanged = new BehaviorSubject<Ads[]>(this.ads);
+  public ads$ = this.adsChanged.asObservable();
+
   getAds() {
     return this.ads.slice();
   }
@@ -39,5 +25,22 @@ export class AdsService {
   }
   deleteAd(index: number) {
     this.ads.splice(index, 1);
+    this.adsChanged.next(this.ads.slice());
   }
-}
+
+  public searchByTitle(term: string): void {
+    let result;
+    if (term !== '') {
+      result = this.ads.filter(item => item.title === term);
+      this.adsChanged.next(result);
+    } else {
+      this.adsChanged.next( this.ads);
+    }
+  }
+  public filter(term: string): void {
+    let result;
+    console.log(term);
+    result = this.ads.filter(item => item.type === term);
+      this.adsChanged.next(result);
+  }
+ }

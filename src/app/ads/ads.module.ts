@@ -8,6 +8,7 @@ import { AdListComponent } from './ad-list/ad-list.component';
 import { AdItemComponent } from './ad-list/ad-item/ad-item.component';
 import { routing } from './ads-routing.module';
 import { ControllAdsComponent } from './controll-ads/controll-ads.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AdsComponent,
@@ -15,12 +16,13 @@ import { ControllAdsComponent } from './controll-ads/controll-ads.component';
     AdDetailsComponent,
     AdListComponent,
     AdItemComponent,
-    ControllAdsComponent
+    ControllAdsComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    routing
+    routing,
+    FormsModule
   ]
 })
 export class AdsModule {

@@ -1,3 +1,40 @@
-<p>
-  controll-ads works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+        <div class="row">
+          <div class="col-xs-8 col-md-6">
+            <div class="input-group">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Search" 
+                id="txtSearch"
+                (input)="inputforSerach($event.target.value)"/>
+              <div class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form (change)="filter($event.target.value)">
+        <div class="form-group">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="Games Console">
+                <label class="custom-control-label" for="defaultUnchecked">Game Console</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="Games">
+                <label class="custom-control-label" for="defaultUnchecked">Games</label>
+            </div>         
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
