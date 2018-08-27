@@ -33,4 +33,11 @@ export class AdsService {
     this.ads[index] = newAd;
     this.adsChanged.next(this.ads.slice());
   }
+  newAd(newAd: Ads) {
+    this.ads.push(newAd);
+    this.adsChanged.next(this.ads.slice());
+  }
+  deleteAd(index: number) {
+    this.ads.splice(index, 1);
+  }
 }

@@ -18,6 +18,19 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="form-group">
+                    <label for="InputPrice">Price</label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="InputPrice" 
+                      placeholder="Enter title"
+                      formControlName="price">
+                  </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
                     <label for="descriptionAnnoucement">Description</label>
                     <textarea 
                       class="form-control" 
@@ -35,7 +48,7 @@
                     <input 
                       type="text" 
                       id="imagePath"
-                      formControlName="img"
+                      formControlName="imgPath"
                       class="form-control"
                       style="margin-top: 5px; width: 500px;"
                     >
@@ -50,8 +63,8 @@
            </button>  
         </div>
       </div>
-      <div class="col-md-5" formArrayName ='contacts'>
-        <div class="row" *ngFor = "let contactCtrl of annoucementForm.get('contacts').controls; let i = index"
+      <div class="col-md-5" formArrayName ='contact'>
+        <div class="row" *ngFor = "let contactCtrl of annoucementForm.get('contact').controls; let i = index"
         [formGroupName]="i">
             <div class="form-group">
                 <label for="InputName">Name</label>

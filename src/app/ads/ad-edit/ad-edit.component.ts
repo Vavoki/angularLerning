@@ -28,6 +28,7 @@ export class AdEditComponent implements OnInit {
   private initForm() {
     let adsName = '';
     let adsDescription = '';
+    let adsPrice = 0;
     const imgs = new FormArray([]);
     const contacts = new FormArray([]);
 
@@ -35,11 +36,12 @@ export class AdEditComponent implements OnInit {
       const ad = this.adsService.getAd(this.id);
       adsName = ad.title;
       adsDescription = ad.description;
+      adsPrice = ad.price;
       if (ad['imgs']) {
         for (const img of ad.imgs) {
           imgs.push(
             new FormGroup({
-              'img': new FormControl(img.imgPath, Validators.required),
+              'imgPath': new FormControl(img.imgPath, Validators.required),
             })
           );
         }
@@ -59,22 +61,21 @@ export class AdEditComponent implements OnInit {
     this.annoucementForm = new FormGroup({
       'title': new FormControl(adsName, Validators.required),
       'description': new FormControl(adsDescription, Validators.required),
+      'price': new FormControl(adsPrice, Validators.required),
       'imgs': imgs,
-      'contacts': contacts
+      'contact': contacts
     });
-    this.onAddImg();
-    this.onAddContacts();
   }
   onAddImg() {
     console.log(event);
    (<FormArray>this.annoucementForm.get('imgs')).push(
       new FormGroup({
-        'img': new FormControl(null, Validators.required),
+        'imgPath': new FormControl(null, Validators.required),
       })
     );
   }
   onAddContacts() {
-    (<FormArray>this.annoucementForm.get('contacts')).push(
+    (<FormArray>this.annoucementForm.get('contact')).push(
       new FormGroup({
         'name': new FormControl(null, Validators.required),
         'phone': new FormControl(null,  [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)
@@ -85,5 +86,13 @@ export class AdEditComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../']);
   }
-  onSubmit() {}
+  onSubmit() {
+    if (this.editeMode) {
+      this.adsService.updateAd(this.id, this.annoucementForm.value);
+      console.log(this.annoucementForm.value);
+    } else {
+      this.adsService.newAd(this.annoucementForm.value);
+    }
+    this.onCancel();
+  }
 }

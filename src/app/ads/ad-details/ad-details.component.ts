@@ -32,4 +32,8 @@ export class AdDetailsComponent implements OnInit {
   onEdit() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
+  onDelete() {
+    this.adsService.deleteAd(this.id);
+    this.router.navigate(['../']);
+  }
 }
