@@ -1,0 +1,23 @@
+<div class="conrainer">
+  <div class="list-group">
+    <div class="col-md-9">
+        <h2>{{ads.title}}</h2>
+        <p>{{ads.description}}</p>
+        <div *ngFor="let img of imgs">
+            <img src={{img.imgPath}} style="width: 250px">
+         </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <h3>{{ ads.price }}ГРН.</h3>
+        <div  *ngFor="let contact of contacts">
+          <span>{{contact.name }}</span>
+          <br>
+          <span>{{contact.phone }}</span>
+        </div>
+        <button></button>
+        <button></button>
+      </div>
+    </div>
+  </div>
+</div>
