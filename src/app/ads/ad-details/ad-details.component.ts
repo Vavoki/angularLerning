@@ -29,5 +29,7 @@ export class AdDetailsComponent implements OnInit {
     console.log('ads', this.ads);
     console.log('img', this.imgs[0].imgPath);
   }
-
+  onEdit() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
 }

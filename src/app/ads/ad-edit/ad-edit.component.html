@@ -1,3 +1,90 @@
-<p>
-  ad-edit works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="annoucementForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-xs-12">
+              <div class="form-group">
+                  <label for="InputTitle">Title annoucement</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="InputTitle" 
+                    placeholder="Enter title"
+                    formControlName="title">
+                </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="descriptionAnnoucement">Description</label>
+                    <textarea 
+                      class="form-control" 
+                      id="descriptionAnnoucement" 
+                      rows="3"
+                      formControlName="description"></textarea>
+               </div>             
+          </div>
+        </div>
+        <div class="row" formArrayName='imgs'>
+            <div class="col-xs-12" *ngFor = "let imgCtrl of annoucementForm.get('imgs').controls; let i = index"
+            [formGroupName]="i">
+                <div class="form-group">
+                    <label for="imagePath">Image URL</label>
+                    <input 
+                      type="text" 
+                      id="imagePath"
+                      formControlName="img"
+                      class="form-control"
+                      style="margin-top: 5px; width: 500px;"
+                    >
+               </div>             
+          </div>
+          <button 
+            class="btn btn-success" 
+            type="button"
+            (click)="onAddImg()"
+            >
+              Add img
+           </button>  
+        </div>
+      </div>
+      <div class="col-md-5" formArrayName ='contacts'>
+        <div class="row" *ngFor = "let contactCtrl of annoucementForm.get('contacts').controls; let i = index"
+        [formGroupName]="i">
+            <div class="form-group">
+                <label for="InputName">Name</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="InputName" 
+                  placeholder="Enter name"
+                  formControlName="name">
+              </div>
+              <div class="form-group">
+                <label for="InputPhone">Phone</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="InputPhone" 
+                  placeholder="Enter phone"
+                  formControlName="phone">
+              </div>
+        </div>
+        <button 
+          class="btn btn-success" 
+          type="button"
+          (click)="onAddContacts()">
+            Add contact
+        </button>
+      </div>
+      <div class="col-xs-12" style="margin-top: 10px">
+          <div class="row">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button class="btn btn-danger" style="margin-left: 5px" (click)="onCancel()">Cancel</button>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>

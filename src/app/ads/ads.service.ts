@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Ads } from './ads.model';
 import { Contact } from '../shared/contact.model';
 import { Img } from '../shared/img.model';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class AdsService {
+  adsChanged = new Subject<Ads[]>();
   private ads: Ads[] = [
     new Ads('PS4', 7000, 'desctiption', [
       new Contact('Vlad', '+380972935418', '23143s111s@gmail.com')
@@ -26,5 +28,9 @@ export class AdsService {
   }
   getAd(id: number) {
     return this.ads[id];
+  }
+  updateAd(index: number, newAd: Ads) {
+    this.ads[index] = newAd;
+    this.adsChanged.next(this.ads.slice());
   }
 }
