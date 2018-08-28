@@ -8,12 +8,13 @@ import { FooterComponent } from './footer/footer.component';
 import { routing } from './app-routing.module';
 import { AdsModule } from './ads/ads.module';
 import { AdsService } from './ads/ads.service';
-import { DataService } from './api.service';
+import { ApiService } from './api.service';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,7 @@ import { DataService } from './api.service';
   ],
   providers: [
     AdsService,
-    DataService,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

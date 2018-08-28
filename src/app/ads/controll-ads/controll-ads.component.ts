@@ -15,7 +15,4 @@ export class ControllAdsComponent implements OnInit {
   inputforSerach(term: string) {
     this.adsService.searchByTitle(term);
   }
-  filter (term: string) {
-    this.adsService.filter(term);
-  }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
+import { Ads } from '../ads.model';
+import { types } from '../../shared/type-array';
 
 @Component({
   selector: 'app-ad-edit',
@@ -11,11 +13,17 @@ import { AdsService } from '../ads.service';
 export class AdEditComponent implements OnInit {
   id: number;
   editeMode = false;
+  types = [
+    {name: 'No type'},
+    {name: 'Games Console'},
+    {name: 'Games'},
+];
   annoucementForm: FormGroup;
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
     private router: Router) { }
   ngOnInit() {
+    console.log(this.types);
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -29,6 +37,7 @@ export class AdEditComponent implements OnInit {
     let adsName = '';
     let adsDescription = '';
     let adsPrice = 0;
+    let type = '';
     const imgs = new FormArray([]);
     const contacts = new FormArray([]);
 
@@ -37,6 +46,8 @@ export class AdEditComponent implements OnInit {
       adsName = ad.title;
       adsDescription = ad.description;
       adsPrice = ad.price;
+      console.log('typ', ad.title);
+      type = ad.type;
       if (ad['imgs']) {
         for (const img of ad.imgs) {
           imgs.push(
@@ -57,14 +68,19 @@ export class AdEditComponent implements OnInit {
         }
       }
     }
-
     this.annoucementForm = new FormGroup({
       'title': new FormControl(adsName, Validators.required),
       'description': new FormControl(adsDescription, Validators.required),
       'price': new FormControl(adsPrice, Validators.required),
+      'type': new FormControl(type, Validators.required),
       'imgs': imgs,
       'contact': contacts
     });
+    if (!this.editeMode) {
+      this.onAddImg();
+      this.onAddContacts();
+    }
+    console.log('THISISFORM1', this.annoucementForm);
   }
   onAddImg() {
     console.log(event);
@@ -93,6 +109,7 @@ export class AdEditComponent implements OnInit {
     } else {
       this.adsService.newAd(this.annoucementForm.value);
     }
+    console.log('THISISFORM2', this.annoucementForm);
     this.onCancel();
   }
 }

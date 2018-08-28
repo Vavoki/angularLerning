@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../api.service';
+import { Ads } from './ads.model';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-ads',
@@ -7,12 +9,9 @@ import { DataService } from '../api.service';
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent implements OnInit {
-  data;
-  constructor(private apiservice: DataService) { }
 
+  constructor(private http: HttpClient) {}
   ngOnInit() {
-    this.data = this.apiservice.getUsers();
-    console.log('DATA', this.data.value);
   }
 
 }

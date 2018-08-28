@@ -28,6 +28,16 @@
                   </div>
             </div>
           </div>
+          <div class="row">
+              <div class="col-xs-12">
+                  <div class="form-group">
+                      <label for="InputType">Type</label>
+                      <select class="form-control" id="contry" formControlName="type">
+                          <option *ngFor="let type of types">{{type.name}}</option>
+                        </select>
+                  </div>
+              </div>
+            </div>
         <div class="row">
             <div class="col-xs-12">
                 <div class="form-group">
