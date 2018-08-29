@@ -6,7 +6,7 @@ import { AdEditComponent } from './ad-edit/ad-edit.component';
 import { AdDetailsComponent } from './ad-details/ad-details.component';
 import { AdListComponent } from './ad-list/ad-list.component';
 import { AdItemComponent } from './ad-list/ad-item/ad-item.component';
-import { routing } from './ads-routing.module';
+import { RecipesRoutingModule } from './ads-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ControllAdsComponent } from './controll-ads/controll-ads.component';
@@ -24,7 +24,7 @@ import { ControlFilterAdsComponent } from './control-filter-ads/control-filter-a
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    routing,
+    RecipesRoutingModule,
     FormsModule,
     HttpClientModule,
   ]
