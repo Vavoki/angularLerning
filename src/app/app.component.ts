@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './api.service';
+import { DataStorageService } from './shared/data-storage';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,9 @@ import { ApiService } from './api.service';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: DataStorageService) {}
   ngOnInit() {
+    this.apiService.getAds();
   }
 }
 

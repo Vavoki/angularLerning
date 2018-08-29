@@ -2,17 +2,27 @@ import { Injectable, OnInit } from '@angular/core';
 import { Ads } from './ads.model';
 import { BehaviorSubject } from 'rxjs';
 import { ads } from './ads-ititial';
-import {HttpClient} from '@angular/common/http';
 import { ApiService } from '../api.service';
-import { ThrowStmt } from '@angular/compiler';
 
 @Injectable()
 export class AdsService {
+  filterObj = {
+    type: '',
+    term: '',
+    price: {
+      min: 0,
+      max: 9999
+    },
+  };
   ads: Ads[] = ads;
-  result = ads;
+  result;
   adsChanged = new BehaviorSubject<Ads[]>(this.ads);
   public ads$ = this.adsChanged.asObservable();
   constructor(private apiService: ApiService) {}
+  setAds(adsApi: Ads[]) {
+    this.ads = adsApi;
+    this.adsChanged.next(this.ads);
+  }
   getAd(id: number) {
     return this.ads[id];
   }
@@ -29,39 +39,33 @@ export class AdsService {
     this.adsChanged.next(this.ads);
   }
 
-  public searchByTitle(term: string): void {
+  public searchByTitle(term: string,  result: Ads[]) {
     if (term !== '') {
-      this.result = this.ads.filter(item => item.title.toLowerCase() === term.toLowerCase());
-      this.adsChanged.next(this.result);
+      result = result.filter(item => item.title.toLowerCase() === term.toLowerCase());
     } else {
-      this.result = this.ads.slice();
-      this.adsChanged.next(this.result);
+      result = result;
     }
+    return result;
   }
-  public filter(term: string): void {
-    console.log(this.result);
-    let arr;
+  public filterbyType(term , result: Ads[])  {
     if (term === '' || term === 'No type') {
-      arr = this.ads.slice();
+     result = result;
     } else {
-      arr = this.ads.filter(item => item.type === term);
+     result = result.filter(item => item.type === term);
     }
-    if (this.result.length === 0) {
-      this.result = arr;
-    } else {
-      this.result = this.result.filter(i => arr[arr.indexOf(i)] === i);
-    }
-    this.adsChanged.next(this.result);
+    console.log(result);
+    return result;
   }
-  public priceRange(min: number, max: number) {
+  public priceRange(min: number, max: number,  result: Ads[]) {
+    result = result.filter(item => item.price > min && item.price <= max);
+    return result;
+  }
+  public filter(): void {
+    this.result = this.ads;
+    this.result = this.searchByTitle(this.filterObj.term, this.result);
+    this.result = this.filterbyType(this.filterObj.type, this.result);
+    this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);
     console.log(this.result);
-    let arr;
-    arr =  this.ads.filter(item => item.price >= min && item.price <= max);
-    if (this.result.length === 0) {
-      this.result = arr;
-    } else {
-      this.result = this.result.filter(i => arr[arr.indexOf(i)] === i);
-    }
     this.adsChanged.next(this.result);
   }
  }

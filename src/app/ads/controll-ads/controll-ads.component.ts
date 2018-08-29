@@ -9,10 +9,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class ControllAdsComponent implements OnInit {
   constructor(private adsService: AdsService) { }
-
   ngOnInit() {
   }
   inputforSerach(term: string) {
-    this.adsService.searchByTitle(term);
+    this.adsService.filterObj.term = term;
+    this.adsService.filter();
   }
 }

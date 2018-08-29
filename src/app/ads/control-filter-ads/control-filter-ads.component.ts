@@ -14,9 +14,12 @@ export class ControlFilterAdsComponent implements OnInit {
   ngOnInit() {
   }
   filter (term: string) {
-   this.adsService.filter(term);
+   this.adsService.filterObj.type = term;
+   this.adsService.filter();
   }
   onPrice() {
-   this.adsService.priceRange(this.minModel, this.maxModel);
+  this.adsService.filterObj.price.min = this.minModel;
+  this.adsService.filterObj.price.max = this.maxModel;
+  this.adsService.filter();
   }
 }

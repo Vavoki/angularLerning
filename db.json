@@ -53,6 +53,24 @@
         {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
         {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
       ]
+    },
+    { 
+      "id": 3,
+      "title": "WOOW",
+      "price": 4000,
+      "description": "description",
+      "type": "games-console",
+      "contact": [ 
+        {
+          "name": "Vlad",
+          "phone": "+380975418",
+          "email": "23143s111s@gmail.com"
+        }
+      ],
+      "imgs": [
+        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
+        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
+      ]
     }
   ]
 }

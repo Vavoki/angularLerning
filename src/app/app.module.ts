@@ -9,6 +9,7 @@ import { routing } from './app-routing.module';
 import { AdsModule } from './ads/ads.module';
 import { AdsService } from './ads/ads.service';
 import { ApiService } from './api.service';
+import { DataStorageService } from './shared/data-storage';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { ApiService } from './api.service';
   ],
   providers: [
     AdsService,
-    ApiService
+    ApiService,
+    DataStorageService,
   ],
   bootstrap: [AppComponent]
 })
