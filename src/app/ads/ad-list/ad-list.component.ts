@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdsService } from '../ads.service';
 import { Ads } from '../ads.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,11 +11,10 @@ import { Ads } from '../ads.model';
 })
 export class AdListComponent implements OnInit {
   ads: Ads[];
-  constructor(private adsService: AdsService) { }
+  subsctiption: Subscription;
+  constructor(public adsService: AdsService) { }
 
   ngOnInit() {
-    this.ads = this.adsService.getAds();
-    console.log(this.ads);
+    console.log(this.adsService.ads$);
   }
-
 }

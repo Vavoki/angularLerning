@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+       <div class="col xs-12">
+          <form (change)="filter($event.target.value)">
+              <div class="form-group">
+                  <div class="custom-control custom-radio">
+                      <div>
+                        <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="">
+                        <label class="custom-control-label" for="defaultUnchecked">All</label>
+                      </div>
+                      <div>
+                        <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="Games Console">
+                        <label class="custom-control-label" for="defaultUnchecked">Game Console</label>
+                      </div>
+                      <div>
+                        <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="Games">
+                        <label class="custom-control-label" for="defaultUnchecked">Games</label>
+                      </div>
+                  </div>        
+                </div>
+            </form>
+            <div class="container">
+                <div class="row">
+                    <label for="min">Min:</label><br>
+                    <input type="text" id="min" [(ngModel)]="minModel" style="width: 100px;" (input)="onPrice()">
+                  </div>
+                  <div class="row">
+                      <label for="max">Max:</label><br> 
+                      <input type="text" id="max"  [(ngModel)]="maxModel" style="width: 100px;" (input)="onPrice()">
+                  </div>
+            </div>
+       </div>
+      </div>
+  </div>

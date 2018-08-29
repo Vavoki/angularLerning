@@ -1,6 +1,7 @@
 <div class="conrainer">
   <div class="list-group">
     <div class="col-md-9">
+        <img src={{imgs[0].imgPath}} style="width: 250px">
         <h2>{{ads.title}}</h2>
         <p>{{ads.description}}</p>
         <div *ngFor="let img of imgs">
@@ -14,9 +15,13 @@
           <span>{{contact.name }}</span>
           <br>
           <span>{{contact.phone }}</span>
+          <br>
+          <span>{{contact.email }}</span>
         </div>
-        <button></button>
-        <button></button>
+        <div style="padding: 10px 0 10px 0">
+          <button class="btn btn-danger btnsize" (click)="onDelete()">Delete accoucement</button>
+          <button class="btn btn-success btnsize" (click)="onEdit()" style="margin-top: 10px">Edit accoucement</button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,76 @@
+{
+  "posts": [
+    { 
+      "id": 1,
+      "title": "PS4",
+      "price": 2000,
+      "description": "description",
+      "type": "games-console",
+      "contact": [ 
+        {
+          "name": "Vlad",
+          "phone": "+380975418",
+          "email": "23143s111s@gmail.com"
+        }
+      ],
+      "imgs": [
+        {"imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "},
+        {"imgPAth": "https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg "}
+      ]
+    },
+    { 
+      "id": 2,
+      "title": "PS4 Slim",
+      "price": 3000,
+      "description": "description",
+      "type": "games-console",
+      "contact": [ 
+        {
+          "name": "Vlad",
+          "phone": "+380975418",
+          "email": "23143s111s@gmail.com"
+        }
+      ],
+      "imgs": [
+        {"imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "},
+        {"imgPAth": "https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg "}
+      ]
+    },
+    { 
+      "id": 3,
+      "title": "WOOW",
+      "price": 4000,
+      "description": "description",
+      "type": "games-console",
+      "contact": [ 
+        {
+          "name": "Vlad",
+          "phone": "+380975418",
+          "email": "23143s111s@gmail.com"
+        }
+      ],
+      "imgs": [
+        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
+        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
+      ]
+    },
+    { 
+      "id": 3,
+      "title": "WOOW",
+      "price": 4000,
+      "description": "description",
+      "type": "games-console",
+      "contact": [ 
+        {
+          "name": "Vlad",
+          "phone": "+380975418",
+          "email": "23143s111s@gmail.com"
+        }
+      ],
+      "imgs": [
+        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
+        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
+      ]
+    }
+  ]
+}
