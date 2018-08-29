@@ -6,13 +6,15 @@ export class Ads {
   public price: number;
   public description: string;
   public type: string;
+  public emailAds: string;
   public contact: Contact[];
   public imgs: Img[];
-  constructor(title: string, price: number, description: string, type: string , contact: Contact[], imgs: Img[]) {
+  constructor(title: string, price: number, description: string, type: string , emailAds: string, contact: Contact[], imgs: Img[]) {
     this.title = title;
     this.price = price;
     this.description = description;
     this.type = type;
+    this.emailAds = emailAds;
     this.contact = contact;
     this.imgs = imgs;
   }
