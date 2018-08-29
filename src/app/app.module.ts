@@ -10,23 +10,29 @@ import { AdsModule } from './ads/ads.module';
 import { AdsService } from './ads/ads.service';
 import { ApiService } from './api.service';
 import { DataStorageService } from './shared/data-storage';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { AlertComponent } from './alert/alert.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AdsModule,
+    AuthModule,
     routing
   ],
   providers: [
     AdsService,
     ApiService,
     DataStorageService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,7 +5,8 @@
       "title": "PS4",
       "price": 2000,
       "description": "description",
-      "type": "games-console",
+      "type": "games console",
+      "emailAds": "vlad-1111@bk.ru1",
       "contact": [ 
         {
           "name": "Vlad",
@@ -23,7 +24,8 @@
       "title": "PS4 Slim",
       "price": 3000,
       "description": "description",
-      "type": "games-console",
+      "type": "games console",
+      "emailAds": "23143s111s@gmail.com",
       "contact": [ 
         {
           "name": "Vlad",
@@ -41,7 +43,8 @@
       "title": "WOOW",
       "price": 4000,
       "description": "description",
-      "type": "games-console",
+      "type": "games",
+      "emailAds": "23143s111s@gmail.com",
       "contact": [ 
         {
           "name": "Vlad",
@@ -59,7 +62,8 @@
       "title": "WOOW",
       "price": 4000,
       "description": "description",
-      "type": "games-console",
+      "type": "games",
+      "emailAds": "23143s111s@gmail.com",
       "contact": [ 
         {
           "name": "Vlad",

@@ -3,6 +3,7 @@ import { Ads } from './ads.model';
 import { BehaviorSubject } from 'rxjs';
 import { ads } from './ads-ititial';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class AdsService {
@@ -18,7 +19,8 @@ export class AdsService {
   result;
   adsChanged = new BehaviorSubject<Ads[]>(this.ads);
   public ads$ = this.adsChanged.asObservable();
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService,
+              private authService: AuthService) {}
   setAds(adsApi: Ads[]) {
     this.ads = adsApi;
     this.adsChanged.next(this.ads);
@@ -31,6 +33,7 @@ export class AdsService {
     this.adsChanged.next(this.ads);
   }
   newAd(newAd: Ads) {
+    newAd.emailAds = this.authService.email;
     this.ads.push(newAd);
     this.adsChanged.next(this.ads);
   }
@@ -51,7 +54,7 @@ export class AdsService {
     if (term === '' || term === 'No type') {
      result = result;
     } else {
-     result = result.filter(item => item.type === term);
+     result = result.filter(item => item.type.toLowerCase() === term.toLowerCase());
     }
     console.log(result);
     return result;

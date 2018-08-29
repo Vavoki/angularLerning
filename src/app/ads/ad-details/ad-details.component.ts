@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ads } from '../ads.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-ad-details',
@@ -15,7 +16,8 @@ export class AdDetailsComponent implements OnInit {
   contacts;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private adsService: AdsService) { }
+              private adsService: AdsService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     console.log(this.route.params);
@@ -26,8 +28,7 @@ export class AdDetailsComponent implements OnInit {
           this.imgs = this.ads.imgs;
           this.contacts = this.ads.contact;
       });
-    console.log('ads', this.ads);
-    console.log('img', this.imgs[0].imgPath);
+
   }
   onEdit() {
     this.router.navigate(['edit'], {relativeTo: this.route});
