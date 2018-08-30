@@ -7,12 +7,14 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sing-up.component.css']
 })
 export class SingUpComponent implements OnInit {
+  model: any = {};
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
-  onSingup(form: NgForm) {
+  onSubmit(form: NgForm) {
+    alert('SUCCESS!!');
     const email = form.value.email;
     const password = form.value.password;
     console.log(email, password);

@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
-import { Ads } from '../ads.model';
-import { types } from '../../shared/type-array';
-
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -46,7 +43,6 @@ export class AdEditComponent implements OnInit {
       adsName = ad.title;
       adsDescription = ad.description;
       adsPrice = ad.price;
-      console.log('typ', ad.title);
       type = ad.type;
       if (ad['imgs']) {
         for (const img of ad.imgs) {
