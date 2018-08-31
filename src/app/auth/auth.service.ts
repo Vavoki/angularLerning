@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   token: string;
   email: string;
+  errMesage: string;
   constructor(private router: Router) {}
   singupUser(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -28,7 +29,9 @@ export class AuthService {
         }
       )
       .catch (
-        error => console.log(error)
+        error => {
+          this.errMesage = error;
+        }
       );
   }
   getToken() {

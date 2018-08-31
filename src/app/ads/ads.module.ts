@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ControllAdsComponent } from './controll-ads/controll-ads.component';
 import { ControlFilterAdsComponent } from './control-filter-ads/control-filter-ads.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [
     AdsComponent,
@@ -27,6 +29,8 @@ import { ControlFilterAdsComponent } from './control-filter-ads/control-filter-a
     RecipesRoutingModule,
     FormsModule,
     HttpClientModule,
+    TextMaskModule,
+    NgxPaginationModule
   ]
 })
 export class AdsModule {

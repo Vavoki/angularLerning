@@ -15,6 +15,9 @@ export class AdEditComponent implements OnInit {
     {name: 'Games Console'},
     {name: 'Games'},
 ];
+  public myModel = '+';
+  public mask = ['+', '(', /\d/, /\d/, /\d/, ')', /[0-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/ ];
+
   annoucementForm: FormGroup;
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
@@ -48,7 +51,7 @@ export class AdEditComponent implements OnInit {
         for (const img of ad.imgs) {
           imgs.push(
             new FormGroup({
-              'imgPath': new FormControl(img.imgPath, Validators.required),
+              'imgPath': new FormControl(img.imgPath),
             })
           );
         }
@@ -58,7 +61,8 @@ export class AdEditComponent implements OnInit {
           contacts.push(
             new FormGroup({
               'name': new FormControl(contact.name, Validators.required),
-              'phone': new FormControl(contact.phone, Validators.required),
+              'phone': new FormControl(contact.phone,
+                [Validators.required, Validators.pattern(/^\++\(+\d+\d+\d+\)+[1-9]+\d+\d+\d+\d+\d+\d+\d+\d$/)]),
             })
           );
         }
@@ -68,7 +72,7 @@ export class AdEditComponent implements OnInit {
       'title': new FormControl(adsName, Validators.required),
       'description': new FormControl(adsDescription, Validators.required),
       'price': new FormControl(adsPrice, Validators.required),
-      'type': new FormControl(type, Validators.required),
+      'type': new FormControl(type),
       'imgs': imgs,
       'contact': contacts
     });
@@ -76,13 +80,12 @@ export class AdEditComponent implements OnInit {
       this.onAddImg();
       this.onAddContacts();
     }
-    console.log('THISISFORM1', this.annoucementForm);
   }
   onAddImg() {
     console.log(event);
    (<FormArray>this.annoucementForm.get('imgs')).push(
       new FormGroup({
-        'imgPath': new FormControl(null, Validators.required),
+        'imgPath': new FormControl(null),
       })
     );
   }
@@ -90,7 +93,7 @@ export class AdEditComponent implements OnInit {
     (<FormArray>this.annoucementForm.get('contact')).push(
       new FormGroup({
         'name': new FormControl(null, Validators.required),
-        'phone': new FormControl(null,  [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)
+        'phone': new FormControl(null, [Validators.required, Validators.pattern(/^\++\(+\d+\d+\d+\)+[1-9]+\d+\d+\d+\d+\d+\d+\d+\d$/)
       ]),
       })
     );
@@ -105,7 +108,6 @@ export class AdEditComponent implements OnInit {
     } else {
       this.adsService.newAd(this.annoucementForm.value);
     }
-    console.log('THISISFORM2', this.annoucementForm);
     this.onCancel();
   }
 }

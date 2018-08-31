@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SingInComponent } from './sing-in/sing-in.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
 import { routing } from './auth-routing';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     SingInComponent,
@@ -17,6 +18,7 @@ import { routing } from './auth-routing';
     FormsModule,
     routing,
     HttpClientModule,
+    NgxSpinnerModule
   ]
 })
 export class AuthModule {

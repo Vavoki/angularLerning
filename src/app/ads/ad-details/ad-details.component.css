@@ -1,3 +1,36 @@
 .btnsize {
   width: 150px;
 }
+.price-label {
+  padding: 9px 5px;
+  margin: 0 0 5px 0;
+  position: relative;
+  border: 1px solid #efefef;
+  border-radius: 0 4px 4px 0;
+  background: #fff;
+  color: #414e41;
+  text-align: center;
+  line-height: 34px;
+  height: 49px;
+  z-index: 2;
+}
+.contact-button {
+  display: block;
+  padding: 12px 15px 12px 0;
+  border: 1px solid #efefef;
+  font-weight: 700;
+  border-left: none;
+  border-radius: 4px;
+  position: relative;
+  color: #fff;
+  font-size: 18px;
+  background: #0098d0;
+  word-wrap: break-word;
+  text-align: center;
+  cursor: pointer;
+}
+.other-ads {
+  border: 1px solid #efefef;
+  padding: 10px;
+  border-radius: 5px;
+}

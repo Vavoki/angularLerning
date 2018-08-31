@@ -10,7 +10,7 @@ const recipesRouters: Routes = [
     path: 'ads', component: AdsComponent, children: [
       { path: '' , component: AdListComponent},
       { path: 'new', component: AdEditComponent, canActivate: [AuthGuard]},
-      { path: ':id', component: AdDetailsComponent, canActivate: [AuthGuard]},
+      { path: ':id', component: AdDetailsComponent},
       { path: ':id/edit', component: AdEditComponent, canActivate: [AuthGuard]}
     ]
   }

@@ -34,6 +34,7 @@ export class AdsService {
   }
   newAd(newAd: Ads) {
     newAd.emailAds = this.authService.email;
+    newAd.contact[0].email = this.authService.email;
     this.ads.push(newAd);
     this.adsChanged.next(this.ads);
   }
@@ -41,7 +42,12 @@ export class AdsService {
     this.ads.splice(index, 1);
     this.adsChanged.next(this.ads);
   }
-
+  getAdsbyAuth(email: string, index: number) {
+    console.log(this.ads);
+    const result = this.ads.filter(item => item.contact[0].email === email);
+    result.splice(index, 1);
+    return result;
+  }
   public searchByTitle(term: string,  result: Ads[]) {
     if (term !== '') {
       result = result.filter(item => item.title.toLowerCase() === term.toLowerCase());

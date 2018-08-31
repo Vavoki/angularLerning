@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class AdListComponent implements OnInit {
   ads: Ads[];
+  p = 1;
   subsctiption: Subscription;
   constructor(public adsService: AdsService) { }
 

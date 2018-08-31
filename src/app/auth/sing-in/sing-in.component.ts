@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-sing-in',
   templateUrl: './sing-in.component.html',
@@ -8,7 +9,8 @@ import { AuthService } from '../auth.service';
 })
 export class SingInComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }

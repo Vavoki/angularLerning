@@ -1,6 +1,6 @@
 <div class="conrainer">
   <div class="list-group">
-    <div class="col-md-9">
+    <div class="col-md-5 main-content">
         <img src={{imgs[0].imgPath}} style="width: 250px">
         <h2>{{ads.title}}</h2>
         <p>{{ads.description}}</p>
@@ -8,15 +8,20 @@
             <img src={{img.imgPath}} style="width: 250px">
          </div>
     </div>
+    <div class="col-lg-1"></div>
     <div class="col-md-3">
       <div class="row">
-        <h3>{{ ads.price }}ГРН.</h3>
+        <div class="price-label">
+          <h3 style="margin-top: 7px; display: block;">{{ ads.price }} ГРН.</h3>
+        </div>
         <div  *ngFor="let contact of contacts">
-          <span>{{contact.name }}</span>
-          <br>
-          <span>{{contact.phone }}</span>
-          <br>
-          <span>{{contact.email }}</span>
+          <div class="contact-button">
+              <span>{{contact.name }}</span>
+          </div>
+          <div class="contact-button" (click)="onOpen()">
+            <span *ngIf="!isOpen">Show phone number</span>
+            <span *ngIf="isOpen">{{contact.phone }}</span>
+          </div>
         </div>
         <ng-template  [ngIf]="authService.isAuth() && ads.emailAds === authService.email">
           <div style="padding: 10px 0 10px 0">
@@ -24,7 +29,21 @@
             <button class="btn btn-success btnsize" (click)="onEdit()" style="margin-top: 10px">Edit accoucement</button>
           </div>
         </ng-template>
-       
+      </div>
+      <div class="row">
+        <div class="tab-other-ads">
+            <h3>Other ads of this author </h3>
+            <ng-container *ngFor = "let ad of authAds let i = index">
+                <a routerLink = "ads/1" style="cursor: pointer; text-decoration: none; color: #000;" *ngIf="i<3">
+                  <div class="other-ads" style="margin-top: 5px;">
+                      <img src={{ad.imgs[0].imgPath}} style="width: 50px">
+                      <span style="display: inline-block;">{{ ad.title}}</span>
+                      <span style="display: block; font-size: 20px">{{ ad.price }} ГРН.</span>
+                  </div>
+                </a>
+            </ng-container>
+            <button class="btn btn-primary" style="margin-top: 10px" routerLink="/ads">Check all ads this author</button>
+        </div>
       </div>
     </div>
   </div>

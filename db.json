@@ -1,7 +1,6 @@
 {
   "posts": [
-    { 
-      "id": 1,
+    { "id":1,
       "title": "PS4",
       "price": 2000,
       "description": "description",
@@ -10,8 +9,8 @@
       "contact": [ 
         {
           "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
+          "phone": "+380972935418",
+          "email": "vlad-1111@bk.ru1"
         }
       ],
       "imgs": [
@@ -20,17 +19,17 @@
       ]
     },
     { 
-      "id": 2,
+      "id":2,
       "title": "PS4 Slim",
       "price": 3000,
       "description": "description",
       "type": "games console",
-      "emailAds": "23143s111s@gmail.com",
+      "emailAds": "vlad-1111@bk.ru1",
       "contact": [ 
         {
           "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
+          "phone": "+380972935418",
+          "email": "vlad-1111@bk.ru1"
         }
       ],
       "imgs": [
@@ -39,36 +38,17 @@
       ]
     },
     { 
-      "id": 3,
+      "id":3,
       "title": "WOOW",
       "price": 4000,
       "description": "description",
       "type": "games",
-      "emailAds": "23143s111s@gmail.com",
+      "emailAds": "vlad-1111@bk.ru1",
       "contact": [ 
         {
           "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
-        }
-      ],
-      "imgs": [
-        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
-        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
-      ]
-    },
-    { 
-      "id": 3,
-      "title": "WOOW",
-      "price": 4000,
-      "description": "description",
-      "type": "games",
-      "emailAds": "23143s111s@gmail.com",
-      "contact": [ 
-        {
-          "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
+          "phone": "+380972935418",
+          "email": "vlad-1111@bk.ru1"
         }
       ],
       "imgs": [
