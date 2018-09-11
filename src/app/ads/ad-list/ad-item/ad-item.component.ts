@@ -13,7 +13,6 @@ export class AdItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.index);
   }
 
 }

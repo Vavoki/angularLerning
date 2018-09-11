@@ -1,13 +1,22 @@
 {
   "posts": [
     {
-      "title": "WOW4",
-      "description": "dfgdsg",
-      "price": 1232131,
-      "type": "Games Console",
+      "title": "PS4",
+      "description": "asfdfasdf",
+      "price": 4000,
+      "type": "",
       "imgs": [
         {
-          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
+          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
+        },
+        {
+          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
+        },
+        {
+          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
+        },
+        {
+          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
         }
       ],
       "contact": [
@@ -17,87 +26,7 @@
           "email": "vlad-1111@bk.ru1"
         }
       ],
-      "id": 10,
-      "emailAds": "vlad-1111@bk.ru1"
-    },
-    {
-      "title": "WOW5",
-      "description": "dfgdsg",
-      "price": 1232131,
-      "type": "Games Console",
-      "imgs": [
-        {
-          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+(111)111 111-111",
-          "email": "vlad-1111@bk.ru1"
-        }
-      ],
-      "id": 11,
-      "emailAds": "vlad-1111@bk.ru1"
-    },
-    {
-      "title": "WOW6",
-      "description": "dfgdsg",
-      "price": 1232131,
-      "type": "Games Console",
-      "imgs": [
-        {
-          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+(111)111 111-111",
-          "email": "vlad-1111@bk.ru1"
-        }
-      ],
-      "id": 12,
-      "emailAds": "vlad-1111@bk.ru1"
-    },
-    {
-      "title": "WOW7",
-      "description": "dfgdsg",
-      "price": 1232131,
-      "type": "Games Console",
-      "imgs": [
-        {
-          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+(111)111 111-111",
-          "email": "vlad-1111@bk.ru1"
-        }
-      ],
-      "id": 13,
-      "emailAds": "vlad-1111@bk.ru1"
-    },
-    {
-      "title": "WOW8",
-      "description": "dfgdsg",
-      "price": 1232131,
-      "type": "Games Console",
-      "imgs": [
-        {
-          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+(111)111 111-111",
-          "email": "vlad-1111@bk.ru1"
-        }
-      ],
-      "id": 14,
+      "id": 15,
       "emailAds": "vlad-1111@bk.ru1"
     }
   ]

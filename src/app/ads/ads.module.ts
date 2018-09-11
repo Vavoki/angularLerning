@@ -20,6 +20,7 @@ import { faExternalLinkAlt, faPlus, faTimes, faDownload } from '@fortawesome/fon
 import * as fontawesome from '@fortawesome/fontawesome';
 fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-author.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     AdItemComponent,
     ControllAdsComponent,
     ControlFilterAdsComponent,
+    FeedbackAuthorComponent,
   ],
   imports: [
     CommonModule,

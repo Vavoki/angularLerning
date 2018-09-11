@@ -1,0 +1,33 @@
+<!-- <form [formGroup]="annoucementForm" (ngSubmit)="onSubmit()"> -->
+  <form>
+      <div class="col-md-7">
+        <h3>Message to author</h3>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="InputTitle">Youe email</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="InputTitle" 
+                placeholder="Enter title">
+            </div>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="descriptionAnnoucement">Message</label>
+              <textarea 
+                class="form-control" 
+                id="descriptionAnnoucement" 
+                rows="3"
+                ></textarea>
+          </div>             
+        </div>
+      </div>
+      <div class="row">
+          <button type="submit" class="btn">Send</button>
+      </div>
+     </div>
+  </form>

@@ -77,6 +77,7 @@ export class AdsService {
     return result;
   }
   public filter(): void {
+    console.log(this.filterObj);
     this.result = this.ads;
     this.result = this.searchByTitle(this.filterObj.term, this.result);
     this.result = this.filterbyType(this.filterObj.type, this.result);

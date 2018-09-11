@@ -22,6 +22,14 @@ export class DataStorageService {
     return this.httpClient.delete(url, httpOptions)
       .subscribe();
   }
+  updateAdd(id: number, updAdd: Ads) {
+    updAdd.id = id;
+    updAdd.emailAds = this.authService.email;
+    updAdd.contact[0].email = this.authService.email;
+    const url = `${urlPost}/${id}`;
+    return this.httpClient.put(url, updAdd, httpOptions)
+      .subscribe();
+  }
   addNewAdd (ad: Ads, id: number) {
     ad.id = id;
     ad.emailAds = this.authService.email;
@@ -41,12 +49,10 @@ export class DataStorageService {
     })
     .map(
       (ads) => {
-        console.log(ads);
         // tslint:disable-next-line:prefer-const
         for (let ad of ads) {
-          if (!ad['ingredients']) {
-            console.log(ad);
-            ad['ingredients'] = [];
+          if (!ad['imgs']) {
+            ad['imgs'] = [];
           }
         }
         return ads;

@@ -106,6 +106,7 @@ export class AdEditComponent implements OnInit {
   onSubmit() {
     if (this.editeMode) {
       this.adsService.updateAd(this.id, this.annoucementForm.value);
+      this.apiService.updateAdd(this.id, this.annoucementForm.value);
     } else {
       this.apiService.addNewAdd(this.annoucementForm.value,  this.adsService.length + 1);
     }
