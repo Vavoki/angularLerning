@@ -3,13 +3,17 @@ import { Ads } from '../ads.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
 import { AuthService } from '../../auth/auth.service';
-
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { Img } from '../../shared/img.model';
+import { DataStorageService } from '../../shared/data-storage';
 @Component({
   selector: 'app-ad-details',
   templateUrl: './ad-details.component.html',
   styleUrls: ['./ad-details.component.css']
 })
 export class AdDetailsComponent implements OnInit {
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
   id: number;
   ads: Ads;
   authAds: Ads[];
@@ -20,10 +24,10 @@ export class AdDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private adsService: AdsService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private apiService: DataStorageService) { }
 
   ngOnInit() {
-    console.log(this.ads);
     let email;
     this.route.params
       .subscribe((params: Params) => {
@@ -32,15 +36,39 @@ export class AdDetailsComponent implements OnInit {
           this.imgs = this.ads.imgs;
           this.contacts = this.ads.contact;
       });
-      // this.link = '/ads/' + this.id;
-      // console.log(this.link);
       email = this.contacts[0].email;
-      this.authAds = this.adsService.getAdsbyAuth(email, this.id);
+      this.authAds = this.adsService.getAdsbyAuth(email);
+      this.galleryOptions = [
+        {
+          imageSize: `contain`,
+        },
+        {
+          breakpoint: 500,
+          width: '300px',
+          height: '300px',
+          thumbnailsColumns: 3 },
+        {
+          breakpoint: 300,
+          width: '100%',
+          height: '200px',
+          thumbnailsColumns: 2 }
+      ];
+    let element = {};
+    this.galleryImages = [];
+    for (let i = 0; i < this.imgs.length; i++) {
+      element = {
+        small: this.imgs[i].imgPath,
+        medium:  this.imgs[i].imgPath,
+        big:  this.imgs[i].imgPath
+      };
+      this.galleryImages.push(element);
+    }
   }
   onEdit() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
   onDelete() {
+    this.apiService.deleteAdd(this.id);
     this.adsService.deleteAd(this.id);
     this.router.navigate(['../']);
   }

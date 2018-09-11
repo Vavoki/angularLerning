@@ -11,7 +11,7 @@
             <app-ad-item
               *ngFor="let adsEl of (adsService.ads$ | async) | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" 
               [ads]='adsEl'
-              [index]='i'></app-ad-item>
+              [index]='adsEl.id'></app-ad-item>
               <pagination-controls (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>

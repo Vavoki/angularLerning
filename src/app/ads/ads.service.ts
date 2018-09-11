@@ -1,9 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Ads } from './ads.model';
 import { BehaviorSubject } from 'rxjs';
-import { ads } from './ads-ititial';
-import { ApiService } from '../api.service';
 import { AuthService } from '../auth/auth.service';
+
 
 @Injectable()
 export class AdsService {
@@ -15,37 +14,46 @@ export class AdsService {
       max: 9999
     },
   };
-  ads: Ads[] = ads;
+  ads: Ads[];
+  length;
   result;
   adsChanged = new BehaviorSubject<Ads[]>(this.ads);
   public ads$ = this.adsChanged.asObservable();
-  constructor(private apiService: ApiService,
-              private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
   setAds(adsApi: Ads[]) {
     this.ads = adsApi;
+    this.length = this.ads[this.ads.length - 1].id;
     this.adsChanged.next(this.ads);
   }
   getAd(id: number) {
-    return this.ads[id];
+    const arr = this.ads.filter(item => item.id === id);
+    const result = arr[0];
+    return result;
   }
   updateAd(index: number, newAd: Ads) {
-    this.ads[index] = newAd;
+    for (let i = 0; i < this.ads.length; i++) {
+      if (this.ads[i].id === index) {
+          this.ads[i] = newAd;
+      }
+    }
     this.adsChanged.next(this.ads);
+
   }
-  newAd(newAd: Ads) {
+  newAd(newAd: Ads, id: number) {
     newAd.emailAds = this.authService.email;
     newAd.contact[0].email = this.authService.email;
+    newAd.id = id;
     this.ads.push(newAd);
+    this.length = this.ads[this.ads.length - 1].id;
     this.adsChanged.next(this.ads);
   }
   deleteAd(index: number) {
-    this.ads.splice(index, 1);
+    this.ads = this.ads.filter(item => item.id !== index);
+    this.length = this.ads[this.ads.length - 1].id;
     this.adsChanged.next(this.ads);
   }
-  getAdsbyAuth(email: string, index: number) {
-    console.log(this.ads);
+  getAdsbyAuth(email: string) {
     const result = this.ads.filter(item => item.contact[0].email === email);
-    result.splice(index, 1);
     return result;
   }
   public searchByTitle(term: string,  result: Ads[]) {
@@ -62,7 +70,6 @@ export class AdsService {
     } else {
      result = result.filter(item => item.type.toLowerCase() === term.toLowerCase());
     }
-    console.log(result);
     return result;
   }
   public priceRange(min: number, max: number,  result: Ads[]) {
@@ -74,7 +81,6 @@ export class AdsService {
     this.result = this.searchByTitle(this.filterObj.term, this.result);
     this.result = this.filterbyType(this.filterObj.type, this.result);
     this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);
-    console.log(this.result);
     this.adsChanged.next(this.result);
   }
  }

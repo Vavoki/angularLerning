@@ -12,22 +12,28 @@ import { ApiService } from './api.service';
 import { DataStorageService } from './shared/data-storage';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
-import { AlertComponent } from './alert/alert.component';
-
+import { ProfileComponent } from './profile/profile.component';
+import 'hammerjs';
+import 'mousetrap';
+import { ModalGalleryModule } from 'angular-modal-gallery';
+import { faExternalLinkAlt, faPlus, faTimes, faDownload } from '@fortawesome/fontawesome-free-solid';
+import * as fontawesome from '@fortawesome/fontawesome';
+fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AlertComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AdsModule,
     AuthModule,
-    routing
+    routing,
+    ModalGalleryModule.forRoot()
   ],
   providers: [
     AdsService,

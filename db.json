@@ -1,60 +1,104 @@
 {
   "posts": [
-    { "id":1,
-      "title": "PS4",
-      "price": 2000,
-      "description": "description",
-      "type": "games console",
-      "emailAds": "vlad-1111@bk.ru1",
-      "contact": [ 
+    {
+      "title": "WOW4",
+      "description": "dfgdsg",
+      "price": 1232131,
+      "type": "Games Console",
+      "imgs": [
         {
-          "name": "Vlad",
-          "phone": "+380972935418",
+          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
+        }
+      ],
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+(111)111 111-111",
           "email": "vlad-1111@bk.ru1"
         }
       ],
-      "imgs": [
-        {"imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "},
-        {"imgPAth": "https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg "}
-      ]
+      "id": 10,
+      "emailAds": "vlad-1111@bk.ru1"
     },
-    { 
-      "id":2,
-      "title": "PS4 Slim",
-      "price": 3000,
-      "description": "description",
-      "type": "games console",
-      "emailAds": "vlad-1111@bk.ru1",
-      "contact": [ 
+    {
+      "title": "WOW5",
+      "description": "dfgdsg",
+      "price": 1232131,
+      "type": "Games Console",
+      "imgs": [
         {
-          "name": "Vlad",
-          "phone": "+380972935418",
+          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
+        }
+      ],
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+(111)111 111-111",
           "email": "vlad-1111@bk.ru1"
         }
       ],
-      "imgs": [
-        {"imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "},
-        {"imgPAth": "https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg "}
-      ]
+      "id": 11,
+      "emailAds": "vlad-1111@bk.ru1"
     },
-    { 
-      "id":3,
-      "title": "WOOW",
-      "price": 4000,
-      "description": "description",
-      "type": "games",
-      "emailAds": "vlad-1111@bk.ru1",
-      "contact": [ 
+    {
+      "title": "WOW6",
+      "description": "dfgdsg",
+      "price": 1232131,
+      "type": "Games Console",
+      "imgs": [
         {
-          "name": "Vlad",
-          "phone": "+380972935418",
+          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
+        }
+      ],
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+(111)111 111-111",
           "email": "vlad-1111@bk.ru1"
         }
       ],
+      "id": 12,
+      "emailAds": "vlad-1111@bk.ru1"
+    },
+    {
+      "title": "WOW7",
+      "description": "dfgdsg",
+      "price": 1232131,
+      "type": "Games Console",
       "imgs": [
-        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
-        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
-      ]
+        {
+          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
+        }
+      ],
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+(111)111 111-111",
+          "email": "vlad-1111@bk.ru1"
+        }
+      ],
+      "id": 13,
+      "emailAds": "vlad-1111@bk.ru1"
+    },
+    {
+      "title": "WOW8",
+      "description": "dfgdsg",
+      "price": 1232131,
+      "type": "Games Console",
+      "imgs": [
+        {
+          "imgPath": "https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg"
+        }
+      ],
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+(111)111 111-111",
+          "email": "vlad-1111@bk.ru1"
+        }
+      ],
+      "id": 14,
+      "emailAds": "vlad-1111@bk.ru1"
     }
   ]
 }

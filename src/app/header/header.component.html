@@ -10,7 +10,11 @@
                 <li routerLinkActive="active"><a routerLink="/singup">SingUp</a></li>
                 <li routerLinkActive="active"><a routerLink="/singin">SingIn</a></li>
               </ng-template>
-                <li><a style="cursor: pointer;" (click)="onLogout()"  *ngIf="authService.isAuth()">Logout</a></li>
+              <ng-template [ngIf]="authService.isAuth()"> 
+                <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/profile">{{authService.email}}</a></li>
+                <li routerLinkActive="active"><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
+              </ng-template>
+               
             </ul>
         </div>
       </div>

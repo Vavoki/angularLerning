@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { AdsService } from '../ads/ads.service';
 import { Ads } from '../ads/ads.model';
-
+import { AuthService } from '../auth/auth.service';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Accept': 'application/json',
+    'Content-Type':  'application/json',
+  })
+};
+const urlPost = 'http://localhost:3000/posts';
 @Injectable()
 export class DataStorageService {
   constructor(private httpClient: HttpClient,
               private adsService: AdsService,
+              private authService: AuthService
               ) {}
-
-  storeRecipes() {
-/*
-    const req = new HttpRequest('PUT', 'https://ng-recipe-book-f088a.firebaseio.com/recipes.json',
-    this.recipeService.getRecipes(), {
-      reportProgress: true,
-    })
-    return this.httpClient.request(req); */
+  deleteAdd(id: number) {
+    const url = `${urlPost}/${id}`;
+    return this.httpClient.delete(url, httpOptions)
+      .subscribe();
   }
-
+  addNewAdd (ad: Ads, id: number) {
+    ad.id = id;
+    ad.emailAds = this.authService.email;
+    ad.contact[0].email = this.authService.email;
+     this.httpClient.post<Ads>('http://localhost:3000/posts', ad, httpOptions)
+     .subscribe((addNewAdd: Ads) => {
+       this.adsService.newAd(addNewAdd, id);
+     });
+   }
   getAds() {
 
     this.httpClient.get<Ads[]>('http://localhost:3000/posts',

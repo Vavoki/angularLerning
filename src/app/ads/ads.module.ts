@@ -13,6 +13,14 @@ import { ControllAdsComponent } from './controll-ads/controll-ads.component';
 import { ControlFilterAdsComponent } from './control-filter-ads/control-filter-ads.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
+import 'hammerjs';
+import 'mousetrap';
+import { ModalGalleryModule } from 'angular-modal-gallery';
+import { faExternalLinkAlt, faPlus, faTimes, faDownload } from '@fortawesome/fontawesome-free-solid';
+import * as fontawesome from '@fortawesome/fontawesome';
+fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
+import { NgxGalleryModule } from 'ngx-gallery';
+
 @NgModule({
   declarations: [
     AdsComponent,
@@ -30,7 +38,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FormsModule,
     HttpClientModule,
     TextMaskModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ModalGalleryModule.forRoot(),
+    NgxGalleryModule
   ]
 })
 export class AdsModule {

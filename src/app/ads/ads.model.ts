@@ -9,7 +9,9 @@ export class Ads {
   public emailAds: string;
   public contact: Contact[];
   public imgs: Img[];
-  constructor(title: string, price: number, description: string, type: string , emailAds: string, contact: Contact[], imgs: Img[]) {
+  public id: number;
+  constructor(title: string, price: number, description: string,
+    type: string , emailAds: string, contact: Contact[], imgs: Img[], id: number) {
     this.title = title;
     this.price = price;
     this.description = description;
@@ -17,5 +19,6 @@ export class Ads {
     this.emailAds = emailAds;
     this.contact = contact;
     this.imgs = imgs;
+    this.id = id;
   }
 }

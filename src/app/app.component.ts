@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { DataStorageService } from './shared/data-storage';
 import * as firebase from 'firebase';
+import {
+  AccessibilityConfig, Action, AdvancedLayout, ButtonEvent,
+  ButtonsConfig, ButtonsStrategy, ButtonType, Description, DescriptionStrategy, GalleryService,
+  DotsConfig, GridLayout, Image, ImageModalEvent, LineLayout, PlainGalleryConfig, PlainGalleryStrategy, PreviewConfig
+} from 'angular-modal-gallery';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +13,8 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  constructor(private apiService: DataStorageService) {}
+  constructor(private apiService: DataStorageService,
+              ) {}
   ngOnInit() {
     firebase.initializeApp({
       // tslint:disable-next-line:quotemark
@@ -16,7 +22,6 @@ export class AppComponent implements OnInit {
       // tslint:disable-next-line:quotemark
       authDomain: "ngeducationalproject.firebaseapp.com",
     });
-    this.apiService.getAds();
   }
 }
 

@@ -9,9 +9,11 @@ import { Ads } from '../../ads.model';
 export class AdItemComponent implements OnInit {
   @Input() ads: Ads;
   @Input() index: number;
+  link = '1';
   constructor() { }
 
   ngOnInit() {
+    console.log(this.index);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
+import { DataStorageService } from '../../shared/data-storage';
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -21,7 +22,8 @@ export class AdEditComponent implements OnInit {
   annoucementForm: FormGroup;
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
-    private router: Router) { }
+    private router: Router,
+    private apiService: DataStorageService) { }
   ngOnInit() {
     console.log(this.types);
     this.route.params
@@ -82,7 +84,7 @@ export class AdEditComponent implements OnInit {
     }
   }
   onAddImg() {
-    console.log(event);
+
    (<FormArray>this.annoucementForm.get('imgs')).push(
       new FormGroup({
         'imgPath': new FormControl(null),
@@ -104,9 +106,8 @@ export class AdEditComponent implements OnInit {
   onSubmit() {
     if (this.editeMode) {
       this.adsService.updateAd(this.id, this.annoucementForm.value);
-      console.log(this.annoucementForm.value);
     } else {
-      this.adsService.newAd(this.annoucementForm.value);
+      this.apiService.addNewAdd(this.annoucementForm.value,  this.adsService.length + 1);
     }
     this.onCancel();
   }
