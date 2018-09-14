@@ -4,6 +4,8 @@ import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { AdsService } from '../ads/ads.service';
 import { Ads } from '../ads/ads.model';
 import { AuthService } from '../auth/auth.service';
+import { Types } from './typesFilter.model';
+import { types } from './type-array';
 const httpOptions = {
   headers: new HttpHeaders({
     'Accept': 'application/json',
@@ -61,6 +63,28 @@ export class DataStorageService {
     .subscribe(
         (ads: Ads[]) => {
           this.adsService.setAds(ads);
+        }
+      );
+  }
+  getTypesFilter() {
+
+    this.httpClient.get<Types[]>('http://localhost:3000/types',
+    {
+      observe: 'body',
+      responseType: 'json',
+
+    })
+    .map(
+      // tslint:disable-next-line:no-shadowed-variable
+      (types) => {
+        console.log(types);
+        return types;
+      }
+    )
+    .subscribe(
+        // tslint:disable-next-line:no-shadowed-variable
+        (types: Types[]) => {
+          this.adsService.setTypes(types);
         }
       );
   }

@@ -12,7 +12,18 @@
               *ngFor="let adsEl of (adsService.ads$ | async) | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" 
               [ads]='adsEl'
               [index]='adsEl.id'></app-ad-item>
-              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+             <pagination-controls
+                (pageChange)="p = ($event)"
+                maxSize="9"
+                directionLinks="true"
+                autoHide="true"
+                responsive="true"
+                previousLabel="Previous"
+                nextLabel="Next"
+                screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page"
+                screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
           </div>
         </div>
     </div>

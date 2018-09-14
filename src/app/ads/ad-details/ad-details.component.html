@@ -5,7 +5,9 @@
         <h2>{{ads.title}}</h2>
         <p>{{ads.description}}</p>
         <ng-template [ngIf]="imgs.length > 3">
-          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+          <div class="row">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+          </div>
         </ng-template>
         <div class="row">
           <app-feedback-author></app-feedback-author>

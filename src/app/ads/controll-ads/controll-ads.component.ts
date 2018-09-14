@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdsService } from '../ads.service';
 import { FormsModule } from '@angular/forms';
+import { DataStorageService } from '../../shared/data-storage';
+import { Types } from '../../shared/typesFilter.model';
 
 @Component({
   selector: 'app-controll-ads',
@@ -8,7 +10,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./controll-ads.component.css']
 })
 export class ControllAdsComponent implements OnInit {
-  constructor(private adsService: AdsService) { }
+  types: Types[];
+  constructor(private adsService: AdsService,
+              private apiService: DataStorageService) { }
   ngOnInit() {
   }
   inputforSerach(term: string) {

@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Ads } from './ads.model';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { Types } from '../shared/typesFilter.model';
 
 
 @Injectable()
@@ -15,15 +16,25 @@ export class AdsService {
     },
   };
   ads: Ads[];
+  types: Types[];
   length;
   result;
+  typesChanged = new BehaviorSubject<Types[]>(this.types);
+  public types$ = this.typesChanged.asObservable();
+
   adsChanged = new BehaviorSubject<Ads[]>(this.ads);
   public ads$ = this.adsChanged.asObservable();
+
   constructor(private authService: AuthService) {}
   setAds(adsApi: Ads[]) {
     this.ads = adsApi;
     this.length = this.ads[this.ads.length - 1].id;
     this.adsChanged.next(this.ads);
+  }
+  setTypes(typesApi: Types[]) {
+    this.types = typesApi;
+    console.log('tupes', this.types);
+    this.typesChanged.next(this.types);
   }
   getAd(id: number) {
     const arr = this.ads.filter(item => item.id === id);
@@ -65,7 +76,7 @@ export class AdsService {
     return result;
   }
   public filterbyType(term , result: Ads[])  {
-    if (term === '' || term === 'No type') {
+    if (term === '' || term === 'No type' || term === 'All') {
      result = result;
     } else {
      result = result.filter(item => item.type.toLowerCase() === term.toLowerCase());

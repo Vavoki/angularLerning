@@ -4,18 +4,12 @@
           <form (change)="filter($event.target.value)">
               <div class="form-group">
                   <div class="custom-control custom-radio">
-                      <div>
-                        <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="">
-                        <label class="custom-control-label" for="defaultUnchecked">All</label>
-                      </div>
-                      <div>
-                        <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="Games Console">
-                        <label class="custom-control-label" for="defaultUnchecked">Game Console</label>
-                      </div>
-                      <div>
-                        <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios"  value="Games">
-                        <label class="custom-control-label" for="defaultUnchecked">Games</label>
-                      </div>
+                    <ng-container  *ngFor="let typeEl of (adsService.types$ | async)">
+                        <div>
+                            <input type="radio" class="custom-control-input" id={{typeEl.id}} name="defaultExampleRadios"  value={{typeEl.name}}>
+                            <label class="custom-control-label" for={{typeEl.id}}>{{ typeEl.name }}</label>
+                          </div>
+                    </ng-container>
                   </div>        
                 </div>
             </form>
