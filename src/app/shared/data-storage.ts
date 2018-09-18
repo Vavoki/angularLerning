@@ -5,7 +5,6 @@ import { AdsService } from '../ads/ads.service';
 import { Ads } from '../ads/ads.model';
 import { AuthService } from '../auth/auth.service';
 import { Types } from './typesFilter.model';
-import { types } from './type-array';
 const httpOptions = {
   headers: new HttpHeaders({
     'Accept': 'application/json',
@@ -77,7 +76,6 @@ export class DataStorageService {
     .map(
       // tslint:disable-next-line:no-shadowed-variable
       (types) => {
-        console.log(types);
         return types;
       }
     )

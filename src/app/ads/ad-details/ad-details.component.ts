@@ -4,12 +4,22 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
 import { AuthService } from '../../auth/auth.service';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { state, trigger, transition, style, animate } from '@angular/animations';
 import { Img } from '../../shared/img.model';
 import { DataStorageService } from '../../shared/data-storage';
 @Component({
   selector: 'app-ad-details',
   templateUrl: './ad-details.component.html',
-  styleUrls: ['./ad-details.component.css']
+  styleUrls: ['./ad-details.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void <=> *', [
+        style({ opacity: 0 }),
+        animate(1000, style({opacity: 1}))
+      ])
+    ])
+  ]
+
 })
 export class AdDetailsComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
@@ -20,6 +30,7 @@ export class AdDetailsComponent implements OnInit {
   imgs;
   link: number;
   contacts;
+  title;
   isOpen = false;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -62,6 +73,7 @@ export class AdDetailsComponent implements OnInit {
         big:  this.imgs[i].imgPath
       };
       this.galleryImages.push(element);
+      this.title = this.imgs[0].imgPath;
     }
   }
   onEdit() {
@@ -74,5 +86,8 @@ export class AdDetailsComponent implements OnInit {
   }
   onOpen() {
     this.isOpen = true;
+  }
+  changeTitleImg(event) {
+    this.title = event.target.src;
   }
 }

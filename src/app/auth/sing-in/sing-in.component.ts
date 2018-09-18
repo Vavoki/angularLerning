@@ -17,7 +17,6 @@ export class SingInComponent implements OnInit {
   onSubmit(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    console.log(email, password);
     this.authService.singinUser(email, password);
   }
 }

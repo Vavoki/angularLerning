@@ -9,10 +9,12 @@ import {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  arr = [1, 2, 3, 4, 5, 6];
+  titlearr: any = '1';
   constructor(private apiService: DataStorageService,
               ) {}
   ngOnInit() {
@@ -22,6 +24,13 @@ export class AppComponent implements OnInit {
       // tslint:disable-next-line:quotemark
       authDomain: "ngeducationalproject.firebaseapp.com",
     });
+  }
+  onEditer(event) {
+    console.log(event.target.firstChild);
+    const arr = [];
+    arr.push(event.target.firstChild);
+    console.log(arr[0].textContent);
+    this.titlearr = arr[0].textContent;
   }
 }
 

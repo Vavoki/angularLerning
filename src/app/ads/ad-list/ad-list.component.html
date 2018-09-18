@@ -4,26 +4,33 @@
     </div>
     <div class="col-md-9">
         <div class="row">
-            <app-controll-ads></app-controll-ads>
+          <app-controll-ads></app-controll-ads>
         </div>
         <div class="row">
           <div class="col-xs-12">
             <app-ad-item
-              *ngFor="let adsEl of (adsService.ads$ | async) | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" 
+              @fade
+              *ngFor="let adsEl of pagedItems let i = index" 
               [ads]='adsEl'
-              [index]='adsEl.id'></app-ad-item>
-             <pagination-controls
-                (pageChange)="p = ($event)"
-                maxSize="9"
-                directionLinks="true"
-                autoHide="true"
-                responsive="true"
-                previousLabel="Previous"
-                nextLabel="Next"
-                screenReaderPaginationLabel="Pagination"
-                screenReaderPageLabel="page"
-                screenReaderCurrentLabel="You're on page">
-            </pagination-controls>
+              [index]='adsEl.id'>
+            </app-ad-item>
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.totalPages)">Last</a>
+              </li>
+          </ul>
           </div>
         </div>
     </div>

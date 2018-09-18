@@ -34,4 +34,21 @@
   padding: 10px;
   border-radius: 5px;
 }
-
+.other-ads:hover {
+  border:1px solid rgb(175, 159, 159);
+}
+.green {
+  background-color: #5cb85c;
+}
+.red {
+  background-color: #d9534f;
+}
+.sizeimg {
+  display: inline-block;
+  width: 100px;
+}
+.tittle-sizeimg {
+  display: block;
+  margin-left: 54px;
+  width: 250px;
+}

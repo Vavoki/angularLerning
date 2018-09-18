@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,15 +19,21 @@ import { faExternalLinkAlt, faPlus, faTimes, faDownload } from '@fortawesome/fon
 import * as fontawesome from '@fortawesome/fontawesome';
 fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginationCustomService } from './ads/pagination/pagination.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AdsModule,
     AuthModule,
@@ -39,7 +44,8 @@ fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
     AdsService,
     ApiService,
     DataStorageService,
-    AuthService
+    AuthService,
+    PaginationCustomService
   ],
   bootstrap: [AppComponent]
 })

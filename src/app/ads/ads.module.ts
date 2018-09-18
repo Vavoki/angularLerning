@@ -13,6 +13,8 @@ import { ControllAdsComponent } from './controll-ads/controll-ads.component';
 import { ControlFilterAdsComponent } from './control-filter-ads/control-filter-ads.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import 'hammerjs';
 import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
@@ -21,6 +23,7 @@ import * as fontawesome from '@fortawesome/fontawesome';
 fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-author.component';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-a
     RecipesRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     TextMaskModule,
     NgxPaginationModule,
     ModalGalleryModule.forRoot(),

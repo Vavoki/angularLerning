@@ -6,19 +6,5 @@
         </div>
       </div>
     <app-footer></app-footer>
-
-      <br>
-      <div class="my-app-custom-plain-container-column">
-        <ng-container *ngFor="let img of images; let i = index">
-          <div *ngIf="i <= 2"> <!-- 2 is a fixed value that I'm using to display only two images -->
-            <a class="more" *ngIf="i==2" (click)="openImageModalColumn(img)"> +{{images.length - 2 - 1}} more </a>
-              <img class="my-app-custom-image-column"
-                   [src]="img.modal.img"
-                   (click)="openImageModalColumn(img)"
-                   [alt]="img.modal.description"/>
-          </div>
-        </ng-container>
-      </div>
 </div>
-
 

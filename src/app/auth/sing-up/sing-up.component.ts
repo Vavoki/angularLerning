@@ -17,7 +17,7 @@ export class SingUpComponent implements OnInit {
     alert('SUCCESS!!');
     const email = form.value.email;
     const password = form.value.password;
-    console.log(email, password);
+
     this.authService.singupUser(email, password);
   }
 }

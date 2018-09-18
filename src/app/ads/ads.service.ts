@@ -33,7 +33,6 @@ export class AdsService {
   }
   setTypes(typesApi: Types[]) {
     this.types = typesApi;
-    console.log('tupes', this.types);
     this.typesChanged.next(this.types);
   }
   getAd(id: number) {
@@ -88,8 +87,14 @@ export class AdsService {
     return result;
   }
   public filter(): void {
-    console.log(this.filterObj);
     this.result = this.ads;
+    this.result = this.searchByTitle(this.filterObj.term, this.result);
+    this.result = this.filterbyType(this.filterObj.type, this.result);
+    this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);
+    this.adsChanged.next(this.result);
+  }
+  public filterL(ads: Ads[]): void {
+    this.result = ads;
     this.result = this.searchByTitle(this.filterObj.term, this.result);
     this.result = this.filterbyType(this.filterObj.type, this.result);
     this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);

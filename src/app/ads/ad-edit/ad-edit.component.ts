@@ -3,10 +3,26 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
 import { DataStorageService } from '../../shared/data-storage';
+import { state, trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
-  styleUrls: ['./ad-edit.component.css']
+  styleUrls: ['./ad-edit.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void <=> *', [
+        style({ opacity: 0 }),
+        animate(1000, style({opacity: 1}))
+      ])
+    ]),
+    trigger('flyInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate(1000)
+      ])
+    ])
+  ]
 })
 export class AdEditComponent implements OnInit {
   id: number;
@@ -25,7 +41,6 @@ export class AdEditComponent implements OnInit {
     private router: Router,
     private apiService: DataStorageService) { }
   ngOnInit() {
-    console.log(this.types);
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -74,7 +89,7 @@ export class AdEditComponent implements OnInit {
       'title': new FormControl(adsName, Validators.required),
       'description': new FormControl(adsDescription, Validators.required),
       'price': new FormControl(adsPrice, Validators.required),
-      'type': new FormControl(type),
+      'type': new FormControl(type.trim()),
       'imgs': imgs,
       'contact': contacts
     });
@@ -104,6 +119,7 @@ export class AdEditComponent implements OnInit {
     this.router.navigate(['../']);
   }
   onSubmit() {
+    this.annoucementForm.value.type = this.annoucementForm.value.type.replace(/\s/g, '');
     if (this.editeMode) {
       this.adsService.updateAd(this.id, this.annoucementForm.value);
       this.apiService.updateAdd(this.id, this.annoucementForm.value);
