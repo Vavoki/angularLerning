@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
 import { DataStorageService } from '../../shared/data-storage';
 import { state, trigger, transition, style, animate } from '@angular/animations';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -39,7 +40,8 @@ export class AdEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
     private router: Router,
-    private apiService: DataStorageService) { }
+    private apiService: DataStorageService,
+    private spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.route.params
       .subscribe(
@@ -127,6 +129,11 @@ export class AdEditComponent implements OnInit {
     } else {
       this.apiService.addNewAdd(this.annoucementForm.value,  this.adsService.length + 1);
     }
-    this.onCancel();
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+      this.onCancel();
+    }, 1500);
+    // this.onCancel();
   }
 }

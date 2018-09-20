@@ -23,6 +23,7 @@ import * as fontawesome from '@fortawesome/fontawesome';
 fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-author.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-a
     TextMaskModule,
     NgxPaginationModule,
     ModalGalleryModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    NgxSpinnerModule
   ]
 })
 export class AdsModule {

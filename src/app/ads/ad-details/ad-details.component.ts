@@ -7,6 +7,7 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
 import { state, trigger, transition, style, animate } from '@angular/animations';
 import { Img } from '../../shared/img.model';
 import { DataStorageService } from '../../shared/data-storage';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 @Component({
   selector: 'app-ad-details',
   templateUrl: './ad-details.component.html',
@@ -25,7 +26,7 @@ export class AdDetailsComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   id: number;
-  ads: Ads;
+  ads: any;
   authAds: Ads[];
   imgs;
   link: number;
@@ -36,53 +37,72 @@ export class AdDetailsComponent implements OnInit {
               private router: Router,
               private adsService: AdsService,
               private authService: AuthService,
-              private apiService: DataStorageService) { }
+              private apiService: DataStorageService,
+              private httpClient: HttpClient) { }
 
   ngOnInit() {
     let email;
+    console.log('ROUTER', this.route.snapshot.params['id']);
     this.route.params
-      .subscribe((params: Params) => {
-          this.id = +params['id'];
-          this.ads = this.adsService.getAd(this.id);
+      .switchMap((params: Params) => {
+        console.log('sss');
+        this.id = +params['id'];
+        return this.getCurrentAds(this.id);
+      })
+      .subscribe((data) => {
+          console.log(data);
+          this.ads = data[0];
           this.imgs = this.ads.imgs;
           this.contacts = this.ads.contact;
+          email = this.contacts[0].email;
+          this.authAds = this.adsService.getAdsbyAuth(email);
+          this.galleryOptions = [
+            {
+              imageSize: `contain`,
+            },
+            {
+              breakpoint: 500,
+              width: '300px',
+              height: '300px',
+              thumbnailsColumns: 3 },
+            {
+              breakpoint: 300,
+              width: '100%',
+              height: '200px',
+              thumbnailsColumns: 2 }
+          ];
+        let element = {};
+        this.galleryImages = [];
+        for (let i = 0; i < this.imgs.length; i++) {
+          element = {
+            small: this.imgs[i].imgPath,
+            medium:  this.imgs[i].imgPath,
+            big:  this.imgs[i].imgPath
+          };
+          this.galleryImages.push(element);
+          this.title = this.imgs[0].imgPath;
+        }
       });
-      email = this.contacts[0].email;
-      this.authAds = this.adsService.getAdsbyAuth(email);
-      this.galleryOptions = [
-        {
-          imageSize: `contain`,
-        },
-        {
-          breakpoint: 500,
-          width: '300px',
-          height: '300px',
-          thumbnailsColumns: 3 },
-        {
-          breakpoint: 300,
-          width: '100%',
-          height: '200px',
-          thumbnailsColumns: 2 }
-      ];
-    let element = {};
-    this.galleryImages = [];
-    for (let i = 0; i < this.imgs.length; i++) {
-      element = {
-        small: this.imgs[i].imgPath,
-        medium:  this.imgs[i].imgPath,
-        big:  this.imgs[i].imgPath
-      };
-      this.galleryImages.push(element);
-      this.title = this.imgs[0].imgPath;
-    }
   }
+  getCurrentAds(id: number) {
+    const url = `http://localhost:3000/posts?id=${id}`;
+   return this.httpClient.get<Ads>(
+     url,
+    {
+      observe: 'body',
+      responseType: 'json',
+
+    });
+    }
   onEdit() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
   onDelete() {
     this.apiService.deleteAdd(this.id);
     this.adsService.deleteAd(this.id);
-    this.router.navigate(['../']);
+    setTimeout(() => {
+      this.router.navigate(['../']);
+    }, 1000);
   }
   onOpen() {
     this.isOpen = true;
@@ -91,7 +111,6 @@ export class AdDetailsComponent implements OnInit {
     this.title = event.target.src;
   }
   allAdsAuth() {
-    console.log('ADDDDDDDDDDDDDDD', this.authAds);
     this.adsService.authAdsElem = this.authAds;
     this.router.navigate(['/ads/list']);
   }

@@ -36,19 +36,18 @@ export class AdListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //  this.apiService.getAds();
+    this.setPage(1);
     this.adsService.adsChanged.subscribe(data => {
       if (data) {
         this.ads = data;
-        this.setPage(1);
+      }
+      if (this.route.url['value'].length) {
+        if (this.route.url['value'][0].path === 'list') {
+          console.log('AUTHOR', this.adsService.authAdsElem);
+          this.ads = this.adsService.authAdsElem;
+        }
       }
     });
-    if (this.route.url['value'].length) {
-      if (this.route.url['value'][0].path === 'list') {
-        console.log('AUTHOR', this.adsService.authAdsElem);
-        this.ads = this.adsService.authAdsElem;
-        this.setPage(1);
-      }
-    }
     // this.adsService.filterchanged.subscribe(data => {
     //   console.log('data =>>>', data);
     //   this.setPage(1);
@@ -59,16 +58,18 @@ export class AdListComponent implements OnInit, OnDestroy {
     //     this.setPage(1);
     //   }
     // }
+    console.log(this.ads);
   }
   setPage(page: number) {
-    console.log('ADS', this.ads);
+    // console.log('ADS', this.ads);
     // get pager object from service
-    this.pager = this.pagerService.getPager(this.ads.length, page);
+    this.getlentgRequst(page);
+    this.getAdsOffsetLimit(page, 5);
     // this.getlentgRequst(page);
     // get current page of items
     // const limit = 5;
-    this.pagedItems = this.ads.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pagedItems);
+    // this.pagedItems = this.ads.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    // console.log(this.pagedItems);
      // this.getAdsOffsetLimit(page, limit);
   }
   getAdsOffsetLimit(page: number, limit: number) {
@@ -101,7 +102,8 @@ export class AdListComponent implements OnInit, OnDestroy {
     )
     .subscribe(
         (ads: Ads[]) => {
-          this.pagedItems = ads;
+        console.log('Setads', ads);
+        this.adsService.setAds(ads);
         }
       );
   }
