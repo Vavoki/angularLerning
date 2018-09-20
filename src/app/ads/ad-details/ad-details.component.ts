@@ -90,4 +90,9 @@ export class AdDetailsComponent implements OnInit {
   changeTitleImg(event) {
     this.title = event.target.src;
   }
+  allAdsAuth() {
+    console.log('ADDDDDDDDDDDDDDD', this.authAds);
+    this.adsService.authAdsElem = this.authAds;
+    this.router.navigate(['/ads/list']);
+  }
 }

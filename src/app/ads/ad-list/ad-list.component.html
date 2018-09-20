@@ -16,7 +16,7 @@
             </app-ad-item>
             <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
               <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(1)">First</a>
+                  <a (click)="set(1)">First</a>
               </li>
               <li [ngClass]="{disabled:pager.currentPage === 1}">
                   <a (click)="setPage(pager.currentPage - 1)">Previous</a>

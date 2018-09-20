@@ -11,7 +11,7 @@ import { DataStorageService } from '../../shared/data-storage';
 })
 export class ControlFilterAdsComponent implements OnInit {
   minModel = 0;
-  maxModel = 9999;
+  maxModel = 99999999;
   types: Types[];
   constructor(private adsService: AdsService,
               private apiService: DataStorageService) { }
@@ -20,12 +20,17 @@ export class ControlFilterAdsComponent implements OnInit {
     this.apiService.getTypesFilter();
   }
   filter (term: string) {
+    console.log(term);
    this.adsService.filterObj.type = term;
+   console.log(this.adsService.filterchanged.getValue());
+   this.adsService.filterchanged.next(this.adsService.filterObj);
    this.adsService.filter();
   }
   onPrice() {
   this.adsService.filterObj.price.min = this.minModel;
   this.adsService.filterObj.price.max = this.maxModel;
+  console.log(this.adsService.filterchanged.getValue());
+  this.adsService.filterchanged.next(this.adsService.filterObj);
   this.adsService.filter();
   }
 }

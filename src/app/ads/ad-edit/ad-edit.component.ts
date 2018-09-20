@@ -44,6 +44,7 @@ export class AdEditComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
+          console.log(params);
           this.id = +params['id'];
           this.editeMode = params['id'] != null;
           this.initForm();

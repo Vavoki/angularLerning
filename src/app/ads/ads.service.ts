@@ -12,16 +12,18 @@ export class AdsService {
     term: '',
     price: {
       min: 0,
-      max: 9999
+      max: 9999999
     },
   };
   ads: Ads[];
   types: Types[];
   length;
   result;
+  authAdsElem: Ads[];
   typesChanged = new BehaviorSubject<Types[]>(this.types);
+  filterchanged = new BehaviorSubject<any>(this.filterObj);
+  public filterchanged$ = this.filterchanged.asObservable();
   public types$ = this.typesChanged.asObservable();
-
   adsChanged = new BehaviorSubject<Ads[]>(this.ads);
   public ads$ = this.adsChanged.asObservable();
 
@@ -67,8 +69,14 @@ export class AdsService {
     return result;
   }
   public searchByTitle(term: string,  result: Ads[]) {
+    console.log('+11');
     if (term !== '') {
-      result = result.filter(item => item.title.toLowerCase() === term.toLowerCase());
+      result = result.filter(item => {
+        if (item.title.toLowerCase().indexOf(term.toLowerCase()) !== -1) {
+          return item;
+        }
+      });
+      // item.title.toLowerCase() === term.toLowerCase());
     } else {
       result = result;
     }
@@ -76,7 +84,7 @@ export class AdsService {
   }
   public filterbyType(term , result: Ads[])  {
     if (term === '' || term === 'No type' || term === 'All') {
-     result = result;
+      result = result;
     } else {
      result = result.filter(item => item.type.toLowerCase() === term.toLowerCase());
     }
@@ -88,13 +96,6 @@ export class AdsService {
   }
   public filter(): void {
     this.result = this.ads;
-    this.result = this.searchByTitle(this.filterObj.term, this.result);
-    this.result = this.filterbyType(this.filterObj.type, this.result);
-    this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);
-    this.adsChanged.next(this.result);
-  }
-  public filterL(ads: Ads[]): void {
-    this.result = ads;
     this.result = this.searchByTitle(this.filterObj.term, this.result);
     this.result = this.filterbyType(this.filterObj.type, this.result);
     this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);

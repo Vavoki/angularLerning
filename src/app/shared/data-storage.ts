@@ -24,6 +24,7 @@ export class DataStorageService {
       .subscribe();
   }
   updateAdd(id: number, updAdd: Ads) {
+    console.log('edit');
     updAdd.id = id;
     updAdd.emailAds = this.authService.email;
     updAdd.contact[0].email = this.authService.email;
@@ -61,6 +62,7 @@ export class DataStorageService {
     )
     .subscribe(
         (ads: Ads[]) => {
+          console.log('GET NEW DATA');
           this.adsService.setAds(ads);
         }
       );
@@ -82,6 +84,7 @@ export class DataStorageService {
     .subscribe(
         // tslint:disable-next-line:no-shadowed-variable
         (types: Types[]) => {
+          console.log(types);
           this.adsService.setTypes(types);
         }
       );

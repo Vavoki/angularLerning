@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdsService } from '../ads.service';
 import { Ads } from '../ads.model';
 import { Subscription } from 'rxjs';
-import { state, trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { PaginationCustomService } from '../pagination/pagination.service';
 import { DataStorageService } from '../../shared/data-storage';
 import { HttpClient } from '@angular/common/http';
-import { forEach } from '@angular/router/src/utils/collection';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ad-list',
@@ -21,37 +21,68 @@ import { forEach } from '@angular/router/src/utils/collection';
     ])
   ]
 })
-export class AdListComponent implements OnInit {
+export class AdListComponent implements OnInit, OnDestroy {
   ads: Ads[];
   p = 1;
   pager: any = {};
   pagedItems: Ads[];
-  subsctiption: Subscription;
+  lengthI: number;
   constructor(public adsService: AdsService,
               private paginationService: PaginationCustomService,
               private apiService: DataStorageService,
-              private httpClient: HttpClient) { }
+              private httpClient: HttpClient,
+              private route: ActivatedRoute,
+              private pagerService: PaginationCustomService) { }
 
   ngOnInit() {
+    //  this.apiService.getAds();
     this.adsService.adsChanged.subscribe(data => {
       if (data) {
         this.ads = data;
         this.setPage(1);
       }
     });
-
+    if (this.route.url['value'].length) {
+      if (this.route.url['value'][0].path === 'list') {
+        console.log('AUTHOR', this.adsService.authAdsElem);
+        this.ads = this.adsService.authAdsElem;
+        this.setPage(1);
+      }
+    }
+    // this.adsService.filterchanged.subscribe(data => {
+    //   console.log('data =>>>', data);
+    //   this.setPage(1);
+    // });
+    // if (this.route.url['value'].length) {
+    //   if (this.route.url['value'][0].path === 'list') {
+    //     console.log('OK');
+    //     this.setPage(1);
+    //   }
+    // }
   }
   setPage(page: number) {
+    console.log('ADS', this.ads);
     // get pager object from service
-    this.pager = this.paginationService.getPager(this.ads.length, page);
+    this.pager = this.pagerService.getPager(this.ads.length, page);
+    // this.getlentgRequst(page);
     // get current page of items
-    const limit = 5;
+    // const limit = 5;
     this.pagedItems = this.ads.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    // this.getAdsOffsetLimit(page, limit);
+    console.log(this.pagedItems);
+     // this.getAdsOffsetLimit(page, limit);
   }
   getAdsOffsetLimit(page: number, limit: number) {
-    console.log(this.adsService.filterObj);
-    this.httpClient.get<Ads[]>(`http://localhost:3000/posts?_page=${page}&_limit=${limit}`,
+    const filterObj = this.adsService.filterObj;
+    console.log(filterObj);
+    let url = `http://localhost:3000/posts?_page=${page}&_limit=${limit}&price_gte=${filterObj.price.min}&price_lte=${filterObj.price.max}`;
+    if (filterObj.type !== '' && filterObj.type !== 'No type' && filterObj.type !== 'All') {
+      url = url + `&type=${filterObj.type}`;
+    }
+    if (filterObj.term !== '') {
+      url = url + `&title=${filterObj.term}`;
+    }
+    this.httpClient.get<Ads[]>(
+      url,
     {
       observe: 'body',
       responseType: 'json',
@@ -73,5 +104,35 @@ export class AdListComponent implements OnInit {
           this.pagedItems = ads;
         }
       );
+  }
+  getlentgRequst(page: number) {
+    const filterObj = this.adsService.filterObj;
+    let url = `http://localhost:3000/posts?price_gte=${filterObj.price.min}&price_lte=${filterObj.price.max}`;
+    if ( filterObj.type !== 'No type' && filterObj.type !== '' && filterObj.type !== 'All') {
+      url = url + `&type=${filterObj.type}`;
+    }
+    if (filterObj.term !== '') {
+      url = url + `&title=${filterObj.term}`;
+    }
+    this.httpClient.get<Ads[]>(
+     url,
+    {
+      observe: 'body',
+      responseType: 'json',
+
+    })
+    .map(
+      (ads) => {
+        return ads;
+      }
+    )
+    .subscribe(
+        (ads: Ads[]) => {
+         this.lengthI = ads.length;
+         this.pager = this.paginationService.getPager( this.lengthI, page);
+        }
+      );
+  }
+  ngOnDestroy() {
   }
 }
