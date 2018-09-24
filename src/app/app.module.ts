@@ -18,10 +18,12 @@ import { ModalGalleryModule } from 'angular-modal-gallery';
 import { faExternalLinkAlt, faPlus, faTimes, faDownload } from '@fortawesome/fontawesome-free-solid';
 import * as fontawesome from '@fortawesome/fontawesome';
 fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
-
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationCustomService } from './ads/pagination/pagination.service';
+import { UploadService } from './ads/ad-edit/upload.service';
 
 
 @NgModule({
@@ -38,9 +40,11 @@ import { PaginationCustomService } from './ads/pagination/pagination.service';
     AdsModule,
     AuthModule,
     routing,
-    ModalGalleryModule.forRoot()
+    ModalGalleryModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [
+    UploadService,
     AdsService,
     ApiService,
     DataStorageService,

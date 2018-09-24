@@ -14,7 +14,7 @@ export class AdsComponent implements OnInit {
   constructor(private http: HttpClient,
               private apiService: DataStorageService) {}
   ngOnInit() {
-    this.apiService.getAds();
+    // this.apiService.getAds();
   }
 
 }

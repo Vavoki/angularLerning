@@ -5,6 +5,8 @@ import { AdsService } from '../ads.service';
 import { DataStorageService } from '../../shared/data-storage';
 import { state, trigger, transition, style, animate } from '@angular/animations';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
+import { UploadService } from './upload.service';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -33,15 +35,20 @@ export class AdEditComponent implements OnInit {
     {name: 'Games Console'},
     {name: 'Games'},
 ];
+  imgArr: any[] = [{imagePath: 'hello'}];
+  // imgArrChanged = new BehaviorSubject<any[]>(this.imgArr);
+  // public imgsArr$ = this.imgArrChanged.asObservable();
   public myModel = '+';
   public mask = ['+', '(', /\d/, /\d/, /\d/, ')', /[0-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/ ];
-
+  selectedFiles: FileList;
+  progress: { percentage: number } = { percentage: 0 };
   annoucementForm: FormGroup;
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
     private router: Router,
     private apiService: DataStorageService,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService,
+    private uploadService: UploadService) { }
   ngOnInit() {
     this.route.params
       .subscribe(
@@ -67,15 +74,9 @@ export class AdEditComponent implements OnInit {
       adsDescription = ad.description;
       adsPrice = ad.price;
       type = ad.type;
-      if (ad['imgs']) {
-        for (const img of ad.imgs) {
-          imgs.push(
-            new FormGroup({
-              'imgPath': new FormControl(img.imgPath),
-            })
-          );
-        }
-      }
+      this.imgArr = ad.imgs;
+      // this.imgArrChanged.next(this.imgArr);
+      console.log('imgArr', this.imgArr);
       if (ad['contact']) {
         for (const contact of ad.contact) {
           contacts.push(
@@ -97,17 +98,14 @@ export class AdEditComponent implements OnInit {
       'contact': contacts
     });
     if (!this.editeMode) {
-      this.onAddImg();
       this.onAddContacts();
     }
   }
-  onAddImg() {
-
-   (<FormArray>this.annoucementForm.get('imgs')).push(
-      new FormGroup({
-        'imgPath': new FormControl(null),
-      })
-    );
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+    const file = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
+    this.uploadService.pushFileToStorage(file, this.progress);
   }
   onAddContacts() {
     (<FormArray>this.annoucementForm.get('contact')).push(
@@ -118,22 +116,48 @@ export class AdEditComponent implements OnInit {
       })
     );
   }
+  onDelete(index: number) {
+    console.log(index);
+    const questrion = confirm('Do you really want to delete this image?');
+    if (questrion) {
+      this.imgArr.splice(index, 1);
+    }
+
+  }
   onCancel() {
     this.router.navigate(['../']);
   }
   onSubmit() {
+    for (let i = 0; i < this.imgArr.length; i++) {
+      (<FormArray>this.annoucementForm.get('imgs')).push(
+        new FormGroup({
+          'imgPath': new FormControl(this.imgArr[i].imgPath),
+        })
+      );
+    }
+    for (let i = 0; i < this.uploadService.imgListUrl.length; i++) {
+      (<FormArray>this.annoucementForm.get('imgs')).push(
+        new FormGroup({
+          'imgPath': new FormControl(this.uploadService.imgListUrl[i]),
+        })
+      );
+    }
+    this.uploadService.imgListUrl = [];
+    this.uploadService.imgListUrlChanged.next(this.uploadService.imgListUrl);
+    console.log(this.annoucementForm.value);
     this.annoucementForm.value.type = this.annoucementForm.value.type.replace(/\s/g, '');
     if (this.editeMode) {
       this.adsService.updateAd(this.id, this.annoucementForm.value);
       this.apiService.updateAdd(this.id, this.annoucementForm.value);
     } else {
-      this.apiService.addNewAdd(this.annoucementForm.value,  this.adsService.length + 1);
+      const date = Date.now();
+      console.log(date);
+      this.apiService.addNewAdd(this.annoucementForm.value,  date);
     }
     this.spinner.show();
     setTimeout(() => {
       this.spinner.hide();
       this.onCancel();
     }, 1500);
-    // this.onCancel();
   }
 }

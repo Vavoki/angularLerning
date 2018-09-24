@@ -15,25 +15,13 @@
   ],
   "posts": [
     {
-      "title": "PS4",
+      "title": "PS41",
       "description": "PS4",
       "price": 7000,
       "type": "GamesConsole",
       "imgs": [
         {
-          "imgPath": "https://images.cdn3.stockunlimited.net/preview1300/comic-effect-wooow_1708345.jpg"
-        },
-        {
-          "imgPath": "https://images.cdn3.stockunlimited.net/preview1300/comic-effect-wooow_1708345.jpg"
-        },
-        {
-          "imgPath": "https://images.cdn3.stockunlimited.net/preview1300/comic-effect-wooow_1708345.jpg"
-        },
-        {
-          "imgPath": "https://images.cdn3.stockunlimited.net/preview1300/comic-effect-wooow_1708345.jpg"
-        },
-        {
-          "imgPath": "https://images.cdn3.stockunlimited.net/preview1300/comic-effect-wooow_1708345.jpg"
+          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
         }
       ],
       "contact": [
@@ -56,16 +44,10 @@
           "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
         },
         {
-          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537797683164PS4-Console-wDS4.png?alt=media&token=05a1d034-292b-4c19-99bf-6a93dd564541"
         },
         {
-          "imgPath": "https://images.cdn3.stockunlimited.net/preview1300/comic-effect-wooow_1708345.jpg"
-        },
-        {
-          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "
-        },
-        {
-          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537797827646boom-flash-on-white_1308-2912.jpg?alt=media&token=1b616bd6-629f-4352-aabd-633da64fc973"
         }
       ],
       "contact": [
@@ -116,86 +98,6 @@
         }
       ],
       "id": 35,
-      "emailAds": "vlad-1111@bk.ru2"
-    },
-    {
-      "title": "WOOW",
-      "description": "asdfdasf",
-      "price": 213213,
-      "type": "Games",
-      "imgs": [
-        {
-          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vlad",
-          "phone": "+",
-          "email": "vlad-1111@bk.ru2"
-        }
-      ],
-      "id": 36,
-      "emailAds": "vlad-1111@bk.ru2"
-    },
-    {
-      "title": "WOOW1",
-      "description": "sdfdsf",
-      "price": 1111,
-      "type": "Games",
-      "imgs": [
-        {
-          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+(111)111 111-111",
-          "email": "vlad-1111@bk.ru2"
-        }
-      ],
-      "id": 37,
-      "emailAds": "vlad-1111@bk.ru2"
-    },
-    {
-      "title": "WOOW2",
-      "description": "asdfdasf",
-      "price": 213213,
-      "type": "Games",
-      "imgs": [
-        {
-          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vlad",
-          "phone": "+",
-          "email": "vlad-1111@bk.ru2"
-        }
-      ],
-      "id": 38,
-      "emailAds": "vlad-1111@bk.ru2"
-    },
-    {
-      "title": "WOOW3",
-      "description": "sdfdsf",
-      "price": 1111,
-      "type": "Games",
-      "imgs": [
-        {
-          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+(111)111 111-111",
-          "email": "vlad-1111@bk.ru2"
-        }
-      ],
-      "id": 39,
       "emailAds": "vlad-1111@bk.ru2"
     },
     {

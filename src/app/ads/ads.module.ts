@@ -24,6 +24,8 @@ fontawesome.library.add(faExternalLinkAlt, faPlus, faTimes, faDownload);
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-author.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../../environments/environment';
 
 
 @NgModule({
@@ -49,7 +51,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxPaginationModule,
     ModalGalleryModule.forRoot(),
     NgxGalleryModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ]
 })
 export class AdsModule {

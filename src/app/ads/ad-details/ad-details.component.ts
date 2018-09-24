@@ -8,6 +8,7 @@ import { state, trigger, transition, style, animate } from '@angular/animations'
 import { Img } from '../../shared/img.model';
 import { DataStorageService } from '../../shared/data-storage';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-ad-details',
   templateUrl: './ad-details.component.html',
@@ -38,7 +39,8 @@ export class AdDetailsComponent implements OnInit {
               private adsService: AdsService,
               private authService: AuthService,
               private apiService: DataStorageService,
-              private httpClient: HttpClient) { }
+              private httpClient: HttpClient,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     let email;
@@ -100,7 +102,9 @@ export class AdDetailsComponent implements OnInit {
   onDelete() {
     this.apiService.deleteAdd(this.id);
     this.adsService.deleteAd(this.id);
+    this.spinner.show();
     setTimeout(() => {
+      this.spinner.hide();
       this.router.navigate(['../']);
     }, 1000);
   }

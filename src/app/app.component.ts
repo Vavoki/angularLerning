@@ -19,10 +19,12 @@ export class AppComponent implements OnInit {
               ) {}
   ngOnInit() {
     firebase.initializeApp({
-      // tslint:disable-next-line:quotemark
-      apiKey: "AIzaSyBtFFoowSLXgNi0QTaw4klQU3enVKNF6U8",
-      // tslint:disable-next-line:quotemark
-      authDomain: "ngeducationalproject.firebaseapp.com",
+      apiKey: 'AIzaSyBtFFoowSLXgNi0QTaw4klQU3enVKNF6U8',
+      authDomain: 'ngeducationalproject.firebaseapp.com',
+      databaseURL: 'https://ngeducationalproject.firebaseio.com',
+      projectId: 'ngeducationalproject',
+      storageBucket: 'ngeducationalproject.appspot.com',
+      messagingSenderId: '103154692115'
     });
   }
   onEditer(event) {

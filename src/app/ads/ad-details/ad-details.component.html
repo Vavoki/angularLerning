@@ -60,7 +60,7 @@
       <div class="row">
         <div class="tab-other-ads">
             <h3>Other ads of this author </h3>
-            <ng-container *ngFor = "let ad of authAds let i = index">
+            <ng-container *ngFor = "let ad of authAds; let i = index">
                 <a routerLink = "/ads/{{ad.id}}" style="cursor: pointer; text-decoration: none; color: #000;" *ngIf="i<3">
                   <div class="other-ads" style="margin-top: 5px;">
                       <img src={{ad.imgs[0].imgPath}} style="width: 50px">
@@ -75,3 +75,8 @@
     </div>
   </div>
 </div>
+<ngx-spinner
+bdColor= "transparent"
+color= "black"
+size = "large"
+></ngx-spinner>

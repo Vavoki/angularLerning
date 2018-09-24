@@ -36,6 +36,7 @@ export class DataStorageService {
     ad.id = id;
     ad.emailAds = this.authService.email;
     ad.contact[0].email = this.authService.email;
+    console.log(ad);
      this.httpClient.post<Ads>('http://localhost:3000/posts', ad, httpOptions)
      .subscribe((addNewAdd: Ads) => {
        this.adsService.newAd(addNewAdd, id);
