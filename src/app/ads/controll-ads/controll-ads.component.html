@@ -10,7 +10,8 @@
                 class="form-control" 
                 placeholder="Search" 
                 id="txtSearch"
-                (input)="inputforSerach($event.target.value)"/>
+                (input)='keyUp.next($event)'
+               />
               <div class="input-group-btn">
                 <button class="btn btn-primary" type="submit">
                   <span class="glyphicon glyphicon-search"></span>

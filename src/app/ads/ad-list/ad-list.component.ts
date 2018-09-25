@@ -27,6 +27,7 @@ export class AdListComponent implements OnInit, OnDestroy {
   pager: any = {};
   pagedItems: Ads[];
   lengthI: number;
+  subscribtion: Subscription;
   constructor(public adsService: AdsService,
               private paginationService: PaginationCustomService,
               private apiService: DataStorageService,
@@ -37,7 +38,7 @@ export class AdListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //  this.apiService.getAds();
     this.setPage(1);
-    this.adsService.adsChanged.subscribe(data => {
+    this.subscribtion = this.adsService.adsChanged.subscribe(data => {
       if (data) {
         this.ads = data;
       }
@@ -136,5 +137,6 @@ export class AdListComponent implements OnInit, OnDestroy {
       );
   }
   ngOnDestroy() {
+    this.subscribtion.unsubscribe();
   }
 }

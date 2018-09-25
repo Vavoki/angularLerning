@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ads } from '../ads.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
@@ -9,6 +9,7 @@ import { Img } from '../../shared/img.model';
 import { DataStorageService } from '../../shared/data-storage';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-ad-details',
   templateUrl: './ad-details.component.html',
@@ -23,7 +24,7 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
   ]
 
 })
-export class AdDetailsComponent implements OnInit {
+export class AdDetailsComponent implements OnInit, OnDestroy {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   id: number;
@@ -34,6 +35,7 @@ export class AdDetailsComponent implements OnInit {
   contacts;
   title;
   isOpen = false;
+  subsctiption: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private adsService: AdsService,
@@ -45,9 +47,8 @@ export class AdDetailsComponent implements OnInit {
   ngOnInit() {
     let email;
     console.log('ROUTER', this.route.snapshot.params['id']);
-    this.route.params
+    this.subsctiption = this.route.params
       .switchMap((params: Params) => {
-        console.log('sss');
         this.id = +params['id'];
         return this.getCurrentAds(this.id);
       })
@@ -85,6 +86,9 @@ export class AdDetailsComponent implements OnInit {
           this.title = this.imgs[0].imgPath;
         }
       });
+  }
+  ngOnDestroy() {
+    this.subsctiption.unsubscribe();
   }
   getCurrentAds(id: number) {
     const url = `http://localhost:3000/posts?id=${id}`;

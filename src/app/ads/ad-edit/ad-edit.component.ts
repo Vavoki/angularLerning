@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
@@ -6,7 +6,7 @@ import { DataStorageService } from '../../shared/data-storage';
 import { state, trigger, transition, style, animate } from '@angular/animations';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { UploadService } from './upload.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -27,7 +27,7 @@ import { BehaviorSubject } from 'rxjs';
     ])
   ]
 })
-export class AdEditComponent implements OnInit {
+export class AdEditComponent implements OnInit, OnDestroy {
   id: number;
   editeMode = false;
   types = [
@@ -43,6 +43,7 @@ export class AdEditComponent implements OnInit {
   selectedFiles: FileList;
   progress: { percentage: number } = { percentage: 0 };
   annoucementForm: FormGroup;
+  subscription: Subscription;
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
     private router: Router,
@@ -59,6 +60,9 @@ export class AdEditComponent implements OnInit {
           this.initForm();
         }
       );
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   private initForm() {
     let adsName = '';
