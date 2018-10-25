@@ -1,31 +1,69 @@
-<div class="conrainer">
+<div class="conrainer" @fade>
   <div class="list-group">
-    <div class="col-md-9">
-        <img src={{imgs[0].imgPath}} style="width: 250px">
-        <h2>{{ads.title}}</h2>
-        <p>{{ads.description}}</p>
-        <div *ngFor="let img of imgs">
-            <img src={{img.imgPath}} style="width: 250px">
-         </div>
-    </div>
-    <div class="col-md-3">
-      <div class="row">
-        <h3>{{ ads.price }}ГРН.</h3>
-        <div  *ngFor="let contact of contacts">
-          <span>{{contact.name }}</span>
-          <br>
-          <span>{{contact.phone }}</span>
-          <br>
-          <span>{{contact.email }}</span>
+    <div class="col-md-5 main-content">
+        <div *ngIf=imgs>
+          <img src={{imgs[0]}} style="width: 250px">
         </div>
-        <ng-template  [ngIf]="authService.isAuth() && ads.emailAds === authService.email">
-          <div style="padding: 10px 0 10px 0">
-            <button class="btn btn-danger btnsize" (click)="onDelete()">Delete accoucement</button>
-            <button class="btn btn-success btnsize" (click)="onEdit()" style="margin-top: 10px">Edit accoucement</button>
+        <div>
+          <hr> 
+          <h2>{{ads?.title}}</h2>
+          <hr>
+          <p>{{ads?.description}}</p>
+          <hr>
+        </div>
+        <ng-template [ngIf]="imgs && imgs.length > 1">
+          <div class="row">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </div>
         </ng-template>
-       
+        <hr>
+        <div>
+          <app-feedback-author></app-feedback-author>
+        </div> 
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="price-label">
+          <h3 style="margin-top: 7px; display: block;">{{ ads?.price }} ГРН.</h3>
+        </div>
+  
+          <div class="contact-button">
+              <span>{{ads?.user?.name }}</span>
+          </div>
+          <div class="contact-button" (click)="onOpen()">
+            <span *ngIf="!isOpen">Show phone number</span>
+            <span *ngIf="ads && isOpen "><span *ngFor="let phone of ads?.user?.phone ">{{ phone }}<br></span></span>
+          </div>
+        <ng-template  [ngIf]="ads && authService.isAuth() && ads.user.login === authService.user.login">
+          <div>
+            <div class="contact-button green" (click)="onEdit()">Edit accoucement</div>
+          </div>
+          <div>
+            <div class="contact-button red" (click)="onDelete()">Delete accoucement</div>
+          </div>
+        </ng-template>
+      </div>
+      <div class="row">
+        <div class="tab-other-ads">
+            <h3>Other ads of this author </h3>
+            <ng-container *ngFor = "let ad of authAds; let i = index">
+                <a routerLink = "/ads/{{ad.id}}" style="cursor: pointer; text-decoration: none; color: #000;" *ngIf="i<3">
+                  <div class="other-ads" style="margin-top: 5px;">
+                      <img src={{ad.imgs[0].imgPath}} style="width: 50px">
+                      <span style="display: inline-block;">{{ ad.title}}</span>
+                      <span style="display: block; font-size: 20px">{{ ad.price }} ГРН.</span>
+                  </div>
+                </a>
+            </ng-container>
+            <a (click)="allAdsAuth()">all ads author</a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<ngx-spinner
+bdColor= "transparent"
+color= "black"
+size = "large"
+></ngx-spinner>

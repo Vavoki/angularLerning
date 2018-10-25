@@ -1,80 +1,107 @@
 {
-  "posts": [
-    { 
+  "types": [
+    {
       "id": 1,
-      "title": "PS4",
-      "price": 2000,
-      "description": "description",
-      "type": "games console",
-      "emailAds": "vlad-1111@bk.ru1",
-      "contact": [ 
-        {
-          "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
-        }
-      ],
-      "imgs": [
-        {"imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "},
-        {"imgPAth": "https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg "}
-      ]
+      "name": "All"
     },
-    { 
+    {
       "id": 2,
+      "name": "GamesConsole"
+    },
+    {
+      "id": 3,
+      "name": "Games"
+    }
+  ],
+  "posts": [
+    {
+      "title": "PS4",
+      "description": "PS4",
+      "price": 7000,
+      "type": "GamesConsole",
+      "imgs": [
+        {
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537891392191vgif-ru-13169.gif?alt=media&token=4680676a-08c3-464c-bda5-77f714f7d622"
+        },
+        {
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537958341159boom-flash-on-white_1308-2912.jpg?alt=media&token=47ec21fe-3a65-4dae-bd65-00ef3be30075"
+        }
+      ],
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+",
+          "email": "vlad-1111@bk.ru1"
+        }
+      ],
+      "id": 31,
+      "emailAds": "vlad-1111@bk.ru1"
+    },
+    {
       "title": "PS4 Slim",
-      "price": 3000,
-      "description": "description",
-      "type": "games console",
-      "emailAds": "23143s111s@gmail.com",
-      "contact": [ 
+      "description": "trewq",
+      "price": 5000,
+      "type": "GamesConsole",
+      "imgs": [
         {
-          "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
+          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
+        },
+        {
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537882017731PS4-Console-wDS4.png?alt=media&token=398ff167-6c75-4b66-9b6c-708b13016f01"
+        },
+        {
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537957442370boom-flash-on-white_1308-2912.jpg?alt=media&token=3f3723d9-5bd6-47de-bd85-fb87e2719daa"
         }
       ],
-      "imgs": [
-        {"imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$ "},
-        {"imgPAth": "https://ksassets.timeincuk.net/wp/uploads/sites/54/2018/03/sony-ps4-pro-9-1-1220x686-920x517.jpg "}
-      ]
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+",
+          "email": "vlad-1111@bk.ru1"
+        }
+      ],
+      "id": 32,
+      "emailAds": "vlad-1111@bk.ru1"
     },
-    { 
-      "id": 3,
+    {
       "title": "WOOW",
-      "price": 4000,
-      "description": "description",
-      "type": "games",
-      "emailAds": "23143s111s@gmail.com",
-      "contact": [ 
+      "description": "asdfdasf",
+      "price": 2132,
+      "type": "Games",
+      "imgs": [
         {
-          "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
+          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537958846827boom-flash-on-white_1308-2912.jpg?alt=media&token=094465e6-6dbd-4b96-808a-1c51d83b425e"
         }
       ],
-      "imgs": [
-        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
-        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
-      ]
+      "contact": [
+        {
+          "name": "Vlad",
+          "phone": "+",
+          "email": "vlad-1111@bk.ru2"
+        }
+      ],
+      "id": 33,
+      "emailAds": "vlad-1111@bk.ru2"
     },
-    { 
-      "id": 3,
+    {
       "title": "WOOW",
-      "price": 4000,
-      "description": "description",
-      "type": "games",
-      "emailAds": "23143s111s@gmail.com",
-      "contact": [ 
+      "description": "sdfdsf",
+      "price": 1111,
+      "type": "Games",
+      "imgs": [
         {
-          "name": "Vlad",
-          "phone": "+380975418",
-          "email": "23143s111s@gmail.com"
+          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
         }
       ],
-      "imgs": [
-        {"imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"},
-        {"imgPAth": "https://thumb1.shutterstock.com/display_pic_with_logo/3903479/434910760/stock-vector-woow-comic-speech-bubble-cartoon-434910760.jpg"}
-      ]
+      "contact": [
+        {
+          "name": "Vladyslav",
+          "phone": "+(111)111 111-111",
+          "email": "vlad-1111@bk.ru2"
+        }
+      ],
+      "id": 35,
+      "emailAds": "vlad-1111@bk.ru2"
     }
   ]
 }

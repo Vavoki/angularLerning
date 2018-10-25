@@ -1,3 +1,3 @@
 export class Img {
-  constructor(public imgPath: string) {}
+  constructor(public id: number, public imgPath: string) {}
 }

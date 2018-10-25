@@ -1,113 +1,104 @@
 <div class="row">
-  <div class="col-xs-12">
-    <form [formGroup]="annoucementForm" (ngSubmit)="onSubmit()">
-      <div class="col-md-7">
-        <div class="row">
-          <div class="col-xs-12">
-              <div class="form-group">
-                  <label for="InputTitle">Title annoucement</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    id="InputTitle" 
-                    placeholder="Enter title"
-                    formControlName="title">
-                </div>
-          </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <label for="InputPrice">Price</label>
-                    <input 
-                      type="number" 
-                      class="form-control" 
-                      id="InputPrice" 
-                      placeholder="Enter title"
-                      formControlName="price">
-                  </div>
-            </div>
-          </div>
-          <div class="row">
+    <div class="col-xs-12">
+      <form *ngIf ="annoucementForm" [formGroup]="annoucementForm" (ngSubmit)="onSubmit()">
+        <div @fade>
+          <div class="col-md-7">
+            <div class="row">
               <div class="col-xs-12">
                   <div class="form-group">
-                      <label for="InputType">Type</label>
-                      <select class="form-control" id="contry" formControlName="type">
-                          <option *ngFor="let type of types">{{type.name}}</option>
-                        </select>
-                  </div>
+                      <label for="InputTitle">Title annoucement</label>
+                      <input 
+                      type="text" 
+                      class="form-control" 
+                      id="InputTitle" 
+                      placeholder="Enter price"
+                      formControlName="title">
+                    </div>
               </div>
             </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <label for="descriptionAnnoucement">Description</label>
-                    <textarea 
-                      class="form-control" 
-                      id="descriptionAnnoucement" 
-                      rows="3"
-                      formControlName="description"></textarea>
-               </div>             
-          </div>
-        </div>
-        <div class="row" formArrayName='imgs'>
-            <div class="col-xs-12" *ngFor = "let imgCtrl of annoucementForm.get('imgs').controls; let i = index"
-            [formGroupName]="i">
-                <div class="form-group">
-                    <label for="imagePath">Image URL</label>
-                    <input 
-                      type="text" 
-                      id="imagePath"
-                      formControlName="imgPath"
-                      class="form-control"
-                      style="margin-top: 5px; width: 500px;"
-                    >
-               </div>             
-          </div>
-          <button 
-            class="btn btn-success" 
-            type="button"
-            (click)="onAddImg()"
-            >
-              Add img
-           </button>  
-        </div>
-      </div>
-      <div class="col-md-5" formArrayName ='contact'>
-        <div class="row" *ngFor = "let contactCtrl of annoucementForm.get('contact').controls; let i = index"
-        [formGroupName]="i">
-            <div class="form-group">
-                <label for="InputName">Name</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  id="InputName" 
-                  placeholder="Enter name"
-                  formControlName="name">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="InputPrice">Price</label>
+                        <input 
+                          type="number" 
+                          class="form-control" 
+                          id="InputPrice" 
+                          placeholder="Enter price"
+                          formControlName="price">
+                      </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="InputPhone">Phone</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  id="InputPhone" 
-                  placeholder="Enter phone"
-                  formControlName="phone">
+              <div class="row">
+                  <div class="col-xs-12">
+                      <div class="form-group">
+                          <label for="InputType">Type</label>
+                          <select class="form-control" id="contry" formControlName="type">
+                              <option *ngFor="let type of adsService.types" >{{type.name}}</option>
+                            </select>
+                      </div>
+                  </div>
+                </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="descriptionAnnoucement">Description</label>
+                        <textarea 
+                          class="form-control" 
+                          id="descriptionAnnoucement" 
+                          rows="3"
+                          formControlName="description"></textarea>
+                  </div>             
               </div>
-        </div>
-        <button 
-          class="btn btn-success" 
-          type="button"
-          (click)="onAddContacts()">
-            Add contact
-        </button>
-      </div>
-      <div class="col-xs-12" style="margin-top: 10px">
-          <div class="row">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button class="btn btn-danger" style="margin-left: 5px" (click)="onCancel()">Cancel</button>
+            </div>
+            <div class="row" *ngIf="editeMode">
+                <ng-container *ngFor = "let imgEl of imgArr; let i = index">
+                  <div class="current-imgs">
+                      <img src="{{ imgEl }}" alt="{{imgEl }}" style="width:150px; height: 150px;">
+                      <p class="btnDelete" (click)="onDelete(i)">DELETE</p>
+                  </div>
+                </ng-container >
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                          <div class="row">
+                            <div class="progress-bar progress-bar-info progress-bar-striped"
+                              role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                              aria-valuemin="0" aria-valuemax="100"
+                              [ngStyle]="{width:progress.percentage+'%'}">
+                              {{progress.percentage}}%
+                            </div>
+                          </div>
+                        <input 
+                          type="file" 
+                          (change)="selectFile($event)"
+                          id="imagePath"
+                          class="form-control"
+                          style="margin-top: 5px; width: 500px;">
+                          <ng-container *ngFor = "let imgEl of (uploadService.imgs$ | async); let i = index">
+                              <div class="current-imgs">
+                                  <p>Img {{i+1}}</p>
+                                  <img [src]="imgEl" alt="imgEl" style="width:150px; height: 150px; display: inline-block;">
+                              </div>
+                          </ng-container >
+                  </div>             
+              </div>
+            </div>
           </div>
-      </div>
-    </form>
+        </div>
+        <div class="col-xs-12" style="margin-top: 10px" @flyInOut>
+            <div class="row">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button class="btn btn-danger" style="margin-left: 5px" (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+  <ngx-spinner
+  bdColor= "transparent"
+  color= "black"
+  size = "large"
+  ></ngx-spinner>
+
