@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-      <form [formGroup]="annoucementForm" (ngSubmit)="onSubmit()">
+      <form *ngIf ="annoucementForm" [formGroup]="annoucementForm" (ngSubmit)="onSubmit()">
         <div @fade>
           <div class="col-md-7">
             <div class="row">
@@ -8,11 +8,11 @@
                   <div class="form-group">
                       <label for="InputTitle">Title annoucement</label>
                       <input 
-                        type="text" 
-                        class="form-control" 
-                        id="InputTitle" 
-                        placeholder="Enter title"
-                        formControlName="title">
+                      type="text" 
+                      class="form-control" 
+                      id="InputTitle" 
+                      placeholder="Enter price"
+                      formControlName="title">
                     </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
                           type="number" 
                           class="form-control" 
                           id="InputPrice" 
-                          placeholder="Enter title"
+                          placeholder="Enter price"
                           formControlName="price">
                       </div>
                 </div>
@@ -34,7 +34,7 @@
                       <div class="form-group">
                           <label for="InputType">Type</label>
                           <select class="form-control" id="contry" formControlName="type">
-                              <option *ngFor="let type of types">{{type.name}}</option>
+                              <option *ngFor="let type of adsService.types" >{{type.name}}</option>
                             </select>
                       </div>
                   </div>
@@ -54,7 +54,7 @@
             <div class="row" *ngIf="editeMode">
                 <ng-container *ngFor = "let imgEl of imgArr; let i = index">
                   <div class="current-imgs">
-                      <img src="{{ imgEl.imgPath }}" alt="{{imgEl.imgPat}}" style="width:150px; height: 150px;">
+                      <img src="{{ imgEl }}" alt="{{imgEl }}" style="width:150px; height: 150px;">
                       <p class="btnDelete" (click)="onDelete(i)">DELETE</p>
                   </div>
                 </ng-container >
@@ -84,29 +84,6 @@
                           </ng-container >
                   </div>             
               </div>
-            </div>
-          </div>
-          <div class="col-md-5" formArrayName ='contact'>
-            <div class="row" *ngFor = "let contactCtrl of annoucementForm.get('contact').controls; let i = index"
-            [formGroupName]="i">
-                <div class="form-group">
-                    <label for="InputName">Name</label>
-                    <input 
-                      type="text" 
-                      class="form-control" 
-                      id="InputName" 
-                      placeholder="Enter name"
-                      formControlName="name">
-                  </div>   
-                  <div class="form-group">
-                      <label for="InputPhone">Phone</label>
-                        <input [textMask]="{mask: mask}" 
-                              [(ngModel)]="myModel" 
-                              type="text"
-                              class="form-control"
-                              formControlName="phone"
-                              id="InputPhone" />
-                    </div>
             </div>
           </div>
         </div>

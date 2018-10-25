@@ -9,28 +9,32 @@ import { Types } from '../shared/typesFilter.model';
 export class AdsService {
   filterObj = {
     type: '',
-    term: '',
-    price: {
-      min: 0,
-      max: 9999999
-    },
+    title: '',
+    minPrice: 0,
+    maxPrice: 9999999
   };
-  ads: Ads[];
-  types: Types[];
+  ads: any[] = [];
+  types: Types[] = [];
   length;
   result;
-  authAdsElem: Ads[];
+  authAdsElem: Ads[] = [];
   typesChanged = new BehaviorSubject<Types[]>(this.types);
   filterchanged = new BehaviorSubject<any>(this.filterObj);
   public filterchanged$ = this.filterchanged.asObservable();
   public types$ = this.typesChanged.asObservable();
   adsChanged = new BehaviorSubject<Ads[]>(this.ads);
   public ads$ = this.adsChanged.asObservable();
+  pager: any = 0;
+  pagerChanged = new BehaviorSubject<any>(this.pager);
+  public pager$ = this.pagerChanged.asObservable();
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
+  pagination(pager) {
+    this.pager = pager;
+    this.pagerChanged.next(this.pager);
+  }
   setAds(adsApi: Ads[]) {
     this.ads = adsApi;
-    this.length = this.ads[this.ads.length - 1].id;
     this.adsChanged.next(this.ads);
   }
   setTypes(typesApi: Types[]) {
@@ -42,9 +46,10 @@ export class AdsService {
     const result = arr[0];
     return result;
   }
-  updateAd(index: number, newAd: Ads) {
+  updateAd(newAd: Ads) {
+
     for (let i = 0; i < this.ads.length; i++) {
-      if (this.ads[i].id === index) {
+      if (this.ads[i].id === newAd.id) {
           this.ads[i] = newAd;
       }
     }
@@ -52,8 +57,6 @@ export class AdsService {
 
   }
   newAd(newAd: Ads, id: number) {
-    newAd.emailAds = this.authService.email;
-    newAd.contact[0].email = this.authService.email;
     newAd.id = id;
     this.ads.push(newAd);
     this.length = this.ads[this.ads.length - 1].id;
@@ -64,12 +67,11 @@ export class AdsService {
     this.length = this.ads[this.ads.length - 1].id;
     this.adsChanged.next(this.ads);
   }
-  getAdsbyAuth(email: string) {
-    const result = this.ads.filter(item => item.contact[0].email === email);
-    return result;
+  getAdsbyAuth(login: string) {
+   const result = this.ads.filter(item => item.user.login === login);
+   return result;
   }
   public searchByTitle(term: string,  result: Ads[]) {
-    console.log('+11');
     if (term !== '') {
       result = result.filter(item => {
         if (item.title.toLowerCase().indexOf(term.toLowerCase()) !== -1) {
@@ -96,9 +98,9 @@ export class AdsService {
   }
   public filter(): void {
     this.result = this.ads;
-    this.result = this.searchByTitle(this.filterObj.term, this.result);
+    this.result = this.searchByTitle(this.filterObj.title, this.result);
     this.result = this.filterbyType(this.filterObj.type, this.result);
-    this.result = this.priceRange(this.filterObj.price.min, this.filterObj.price.max, this.result);
+    this.result = this.priceRange(this.filterObj.minPrice, this.filterObj.maxPrice, this.result);
     this.adsChanged.next(this.result);
   }
  }

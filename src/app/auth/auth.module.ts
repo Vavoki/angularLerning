@@ -7,19 +7,26 @@ import { SingInComponent } from './sing-in/sing-in.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
 import { routing } from './auth-routing';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { TextMaskModule } from 'angular2-text-mask';
 @NgModule({
   declarations: [
     SingInComponent,
     SingUpComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     routing,
+    TextMaskModule,
     HttpClientModule,
-    NgxSpinnerModule
-  ]
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+  ],
+  exports: [BrowserModule, BrowserAnimationsModule]
 })
 export class AuthModule {
 

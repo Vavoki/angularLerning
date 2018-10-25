@@ -12,7 +12,7 @@
                 <li routerLinkActive="active"><a routerLink="/singin">Sign In</a></li>
               </ng-template>
               <ng-template [ngIf]="authService.isAuth()"> 
-                <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/profile">{{authService.email}}</a></li>
+                <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/profile">{{authService.user.login}}</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
               </ng-template>
                

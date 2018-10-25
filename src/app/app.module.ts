@@ -24,6 +24,11 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationCustomService } from './ads/pagination/pagination.service';
 import { UploadService } from './ads/ad-edit/upload.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MessageComponent } from './profile/message/message.component';
+import { CurrentMessageComponent } from './profile/message/current-message/current-message.component';
+import { MessageService } from './profile/message.service';
+import { DetailMessageComponent } from './profile/message/detail-message/detail-message.component';
 
 
 @NgModule({
@@ -32,10 +37,15 @@ import { UploadService } from './ads/ad-edit/upload.service';
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
+    MessageComponent,
+    CurrentMessageComponent,
+    DetailMessageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     AdsModule,
     AuthModule,
@@ -49,7 +59,8 @@ import { UploadService } from './ads/ad-edit/upload.service';
     ApiService,
     DataStorageService,
     AuthService,
-    PaginationCustomService
+    PaginationCustomService,
+    MessageService,
   ],
   bootstrap: [AppComponent]
 })

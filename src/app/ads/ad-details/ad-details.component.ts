@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { Ads } from '../ads.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AdsService } from '../ads.service';
@@ -10,6 +10,8 @@ import { DataStorageService } from '../../shared/data-storage';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
+import { PaginationService } from 'ngx-pagination';
+import { PaginationCustomService } from '../pagination/pagination.service';
 @Component({
   selector: 'app-ad-details',
   templateUrl: './ad-details.component.html',
@@ -28,6 +30,7 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   id: number;
+  userId: number;
   ads: any;
   authAds: Ads[];
   imgs;
@@ -36,41 +39,40 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
   title;
   isOpen = false;
   subsctiption: Subscription;
+  adsSub: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private adsService: AdsService,
               private authService: AuthService,
               private apiService: DataStorageService,
+              private paginationService: PaginationCustomService,
               private httpClient: HttpClient,
               private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    let email;
-    console.log('ROUTER', this.route.snapshot.params['id']);
     this.subsctiption = this.route.params
       .switchMap((params: Params) => {
         this.id = +params['id'];
-        return this.getCurrentAds(this.id);
+        return this.apiService.getCurrentAds(this.id);
       })
       .subscribe((data) => {
-          console.log(data);
-          this.ads = data[0];
+          this.ads = data;
           this.imgs = this.ads.imgs;
-          this.contacts = this.ads.contact;
-          email = this.contacts[0].email;
-          this.authAds = this.adsService.getAdsbyAuth(email);
+          this.userId = data.user.id;
+          this.getAds(data.user.id);
           this.galleryOptions = [
             {
+              width: '350px',
               imageSize: `contain`,
             },
             {
               breakpoint: 500,
-              width: '300px',
-              height: '300px',
+              width: '150px',
+              height: '350px',
               thumbnailsColumns: 3 },
             {
               breakpoint: 300,
-              width: '100%',
+              width: '50%',
               height: '200px',
               thumbnailsColumns: 2 }
           ];
@@ -78,34 +80,34 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
         this.galleryImages = [];
         for (let i = 0; i < this.imgs.length; i++) {
           element = {
-            small: this.imgs[i].imgPath,
-            medium:  this.imgs[i].imgPath,
-            big:  this.imgs[i].imgPath
+            small: this.imgs[i],
+            medium:  this.imgs[i],
+            big:  this.imgs[i]
           };
           this.galleryImages.push(element);
-          this.title = this.imgs[0].imgPath;
+          this.title = this.imgs[0];
         }
       });
   }
   ngOnDestroy() {
     this.subsctiption.unsubscribe();
   }
-  getCurrentAds(id: number) {
-    const url = `http://localhost:3000/posts?id=${id}`;
-   return this.httpClient.get<Ads>(
-     url,
-    {
-      observe: 'body',
-      responseType: 'json',
-
-    });
-    }
+  getAds(id: number) {
+    this.adsSub = this.apiService.getAdsbyUserId(id)
+   .subscribe(
+     (data) => {
+      this.authAds = data[0];
+      this.adsService.setAds(data[0]);
+      const pager = this.paginationService.getPager( data[1], 1);
+      this.adsService.pagination(pager);
+     }
+     );
+  }
   onEdit() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
   onDelete() {
     this.apiService.deleteAdd(this.id);
-    this.adsService.deleteAd(this.id);
     this.spinner.show();
     setTimeout(() => {
       this.spinner.hide();
@@ -120,6 +122,6 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
   }
   allAdsAuth() {
     this.adsService.authAdsElem = this.authAds;
-    this.router.navigate(['/ads/list']);
+    this.router.navigate(['/ads/list'], {queryParams: {id: this.userId}});
   }
 }

@@ -5,6 +5,8 @@ import { DataStorageService } from '../../shared/data-storage';
 import { Types } from '../../shared/typesFilter.model';
 import { Observable, Subject, Subscription } from 'rxjs';
 import 'rxjs/add/observable/fromEvent';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-controll-ads',
   templateUrl: './controll-ads.component.html',
@@ -14,7 +16,10 @@ export class ControllAdsComponent implements OnInit, OnDestroy {
   private keyUp = new Subject<any>();
   subscription: Subscription;
   types: Types[];
+  title = '';
   constructor(private adsService: AdsService,
+              private router: Router,
+              private rout: ActivatedRoute,
               private apiService: DataStorageService) {
                 this.subscription = this.keyUp
                 .map(value => value.target.value)
@@ -24,18 +29,15 @@ export class ControllAdsComponent implements OnInit, OnDestroy {
                   return Observable.of(search).delay(500);
                 })
                 .subscribe((data) => {
-                  console.log('data', data);
-                  this.adsService.filterObj.term = data;
-                  this.adsService.filter();
+                  this.adsService.filterObj.title = data;
+                  this.router.navigate(['/ads'], {queryParams: this.adsService.filterObj});
                 });
               }
   ngOnInit() {
-    console.log('start');
-    console.log(this.subscription);
+    this.title = this.rout.snapshot.queryParams.title;
+    console.log(this.title);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    console.log('end');
-    console.log(this.subscription);
   }
 }

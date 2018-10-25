@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf=!hide>
     <div class="row">
        <div class="col xs-12">
           <form (change)="filter($event.target.value)">

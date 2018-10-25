@@ -28,10 +28,8 @@ export class AppComponent implements OnInit {
     });
   }
   onEditer(event) {
-    console.log(event.target.firstChild);
     const arr = [];
     arr.push(event.target.firstChild);
-    console.log(arr[0].textContent);
     this.titlearr = arr[0].textContent;
   }
 }

@@ -1,29 +1,17 @@
 <div class="conrainer" @fade>
   <div class="list-group">
     <div class="col-md-5 main-content">
-        <div>
-          <img src={{imgs[0].imgPath}} style="width: 250px">
+        <div *ngIf=imgs>
+          <img src={{imgs[0]}} style="width: 250px">
         </div>
         <div>
           <hr> 
-          <h2>{{ads.title}}</h2>
+          <h2>{{ads?.title}}</h2>
           <hr>
-          <p>{{ads.description}}</p>
+          <p>{{ads?.description}}</p>
           <hr>
         </div>
-        <!-- <img class="tittle-sizeimg"
-             @fade
-             [src]="title"
-             [alt]="title"
-        />
-        <ng-container *ngFor = "let img  of imgs">
-            <img class="sizeimg"
-                @fade
-                [src]="img.imgPath"
-                (click)="changeTitleImg($event)"
-                [alt]="img.imgPath"/>
-        </ng-container> -->
-        <ng-template [ngIf]="imgs.length > 1">
+        <ng-template [ngIf]="imgs && imgs.length > 1">
           <div class="row">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </div>
@@ -37,18 +25,17 @@
     <div class="col-md-3">
       <div class="row">
         <div class="price-label">
-          <h3 style="margin-top: 7px; display: block;">{{ ads.price }} ГРН.</h3>
+          <h3 style="margin-top: 7px; display: block;">{{ ads?.price }} ГРН.</h3>
         </div>
-        <div  *ngFor="let contact of contacts">
+  
           <div class="contact-button">
-              <span>{{contact.name }}</span>
+              <span>{{ads?.user?.name }}</span>
           </div>
           <div class="contact-button" (click)="onOpen()">
             <span *ngIf="!isOpen">Show phone number</span>
-            <span *ngIf="isOpen">{{contact.phone }}</span>
+            <span *ngIf="ads && isOpen "><span *ngFor="let phone of ads?.user?.phone ">{{ phone }}<br></span></span>
           </div>
-        </div>
-        <ng-template  [ngIf]="authService.isAuth() && ads.emailAds === authService.email">
+        <ng-template  [ngIf]="ads && authService.isAuth() && ads.user.login === authService.user.login">
           <div>
             <div class="contact-button green" (click)="onEdit()">Edit accoucement</div>
           </div>

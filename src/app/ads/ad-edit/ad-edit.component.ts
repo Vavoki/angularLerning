@@ -7,6 +7,7 @@ import { state, trigger, transition, style, animate } from '@angular/animations'
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { UploadService } from './upload.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -30,12 +31,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 export class AdEditComponent implements OnInit, OnDestroy {
   id: number;
   editeMode = false;
-  types = [
-    {name: 'No type'},
-    {name: 'Games Console'},
-    {name: 'Games'},
-];
-  imgArr: any[] = [{imagePath: 'hello'}];
+  types = this.adsService.types;
+  imgArr: any[] = [];
   // imgArrChanged = new BehaviorSubject<any[]>(this.imgArr);
   // public imgsArr$ = this.imgArrChanged.asObservable();
   public myModel = '+';
@@ -47,63 +44,53 @@ export class AdEditComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private adsService: AdsService,
     private router: Router,
+    private authService: AuthService,
     private apiService: DataStorageService,
     private spinner: NgxSpinnerService,
     private uploadService: UploadService) { }
   ngOnInit() {
-    this.route.params
+    this.spinner.show();
+    this.subscription = this.route.params
+    .switchMap((params: Params) => {
+      this.id = +params['id'];
+      this.editeMode = params['id'] != null;
+      return this.apiService.getCurrentAds(this.id);
+    })
       .subscribe(
-        (params: Params) => {
-          console.log(params);
-          this.id = +params['id'];
-          this.editeMode = params['id'] != null;
-          this.initForm();
+        (data) => {
+            this.initForm(data);
+            this.spinner.hide();
+        },
+        (err) => {
+            this.initForm();
+            this.spinner.hide();
         }
       );
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  private initForm() {
+  private initForm(data?: any) {
     let adsName = '';
     let adsDescription = '';
     let adsPrice = 0;
     let type = '';
     const imgs = new FormArray([]);
-    const contacts = new FormArray([]);
 
     if (this.editeMode) {
-      const ad = this.adsService.getAd(this.id);
-      adsName = ad.title;
-      adsDescription = ad.description;
-      adsPrice = ad.price;
-      type = ad.type;
-      this.imgArr = ad.imgs;
-      // this.imgArrChanged.next(this.imgArr);
-      console.log('imgArr', this.imgArr);
-      if (ad['contact']) {
-        for (const contact of ad.contact) {
-          contacts.push(
-            new FormGroup({
-              'name': new FormControl(contact.name, Validators.required),
-              'phone': new FormControl(contact.phone,
-                [Validators.required, Validators.pattern(/^\++\(+\d+\d+\d+\)+[1-9]+\d+\d+\d+\d+\d+\d+\d+\d$/)]),
-            })
-          );
-        }
-      }
+      adsName = data.title;
+      adsDescription = data.description;
+      adsPrice = data.price;
+      type = data.type;
+      this.imgArr = data.imgs;
     }
     this.annoucementForm = new FormGroup({
       'title': new FormControl(adsName, Validators.required),
       'description': new FormControl(adsDescription, Validators.required),
       'price': new FormControl(adsPrice, Validators.required),
-      'type': new FormControl(type.trim()),
+      'type': new FormControl('Game Console'),
       'imgs': imgs,
-      'contact': contacts
     });
-    if (!this.editeMode) {
-      this.onAddContacts();
-    }
   }
   selectFile(event) {
     this.selectedFiles = event.target.files;
@@ -111,17 +98,7 @@ export class AdEditComponent implements OnInit, OnDestroy {
     this.selectedFiles = undefined;
     this.uploadService.pushFileToStorage(file, this.progress);
   }
-  onAddContacts() {
-    (<FormArray>this.annoucementForm.get('contact')).push(
-      new FormGroup({
-        'name': new FormControl(null, Validators.required),
-        'phone': new FormControl(null, [Validators.required, Validators.pattern(/^\++\(+\d+\d+\d+\)+[1-9]+\d+\d+\d+\d+\d+\d+\d+\d$/)
-      ]),
-      })
-    );
-  }
   onDelete(index: number) {
-    console.log(index);
     const questrion = confirm('Do you really want to delete this image?');
     if (questrion) {
       this.imgArr.splice(index, 1);
@@ -132,31 +109,16 @@ export class AdEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['../']);
   }
   onSubmit() {
-    for (let i = 0; i < this.imgArr.length; i++) {
-      (<FormArray>this.annoucementForm.get('imgs')).push(
-        new FormGroup({
-          'imgPath': new FormControl(this.imgArr[i].imgPath),
-        })
-      );
-    }
-    for (let i = 0; i < this.uploadService.imgListUrl.length; i++) {
-      (<FormArray>this.annoucementForm.get('imgs')).push(
-        new FormGroup({
-          'imgPath': new FormControl(this.uploadService.imgListUrl[i]),
-        })
-      );
-    }
+    this.annoucementForm.value.imgs = [ ...this.uploadService.imgListUrl];
     this.uploadService.imgListUrl = [];
     this.uploadService.imgListUrlChanged.next(this.uploadService.imgListUrl);
-    console.log(this.annoucementForm.value);
-    this.annoucementForm.value.type = this.annoucementForm.value.type.replace(/\s/g, '');
     if (this.editeMode) {
-      this.adsService.updateAd(this.id, this.annoucementForm.value);
+      this.annoucementForm.value.imgs = this.imgArr.concat(this.annoucementForm.value.imgs);
+      this.annoucementForm.value.user = this.authService.user.id;
       this.apiService.updateAdd(this.id, this.annoucementForm.value);
     } else {
-      const date = Date.now();
-      console.log(date);
-      this.apiService.addNewAdd(this.annoucementForm.value,  date);
+      this.annoucementForm.value.user = this.authService.user.id;
+      this.apiService.addNewAdd(this.annoucementForm.value);
     }
     this.spinner.show();
     setTimeout(() => {
