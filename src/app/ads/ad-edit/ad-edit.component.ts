@@ -117,7 +117,8 @@ export class AdEditComponent implements OnInit, OnDestroy {
       this.annoucementForm.value.user = this.authService.user.id;
       this.apiService.updateAdd(this.id, this.annoucementForm.value);
     } else {
-      this.annoucementForm.value.user = this.authService.user.id;
+      console.log(this.authService.user.name);
+      this.annoucementForm.value.user = this.authService.user;
       this.apiService.addNewAdd(this.annoucementForm.value);
     }
     this.spinner.show();

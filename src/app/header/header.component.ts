@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['ads/new'], {relativeTo: this.route});
   }
   onLogout() {
+    this.router.navigate(['/']);
     this.authService.loggout();
   }
 }

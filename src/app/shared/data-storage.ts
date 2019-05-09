@@ -24,7 +24,7 @@ export class DataStorageService {
               private messageService: MessageService
               ) {}
   deleteAdd(id: number) {
-    const url = `http://localhost:3001/ads/${id}`;
+    const url = `http://localhost:3000/ads/${id}`;
     return this.httpClient.delete(url, httpOptions)
     .map(
       (ads) => {
@@ -42,7 +42,7 @@ export class DataStorageService {
   }
   updateAdd(id: number, updAdd: Ads) {
     updAdd.id = id;
-    const url = `http://localhost:3001/ads/edit/${id}`;
+    const url = `http://localhost:3000/ads/edit/${id}`;
     return this.httpClient.put(url, updAdd, httpOptions)
     .map(
       (ads) => {
@@ -57,7 +57,8 @@ export class DataStorageService {
       );
   }
   addNewAdd (ad: any) {
-     this.httpClient.post<Ads>('http://localhost:3001/ads', ad, httpOptions)
+      console.log(ad);
+     this.httpClient.post<Ads>('http://localhost:3000/ads', ad, httpOptions)
      .map(
       (ads) => {
         return ads;
@@ -84,15 +85,22 @@ export class DataStorageService {
     if (Object.keys(query).length === 0) {
       query = filterObj;
     }
-    const newQuery = {...query, ...{take: limit}, ...{skip: skip}};
-    const url =
-    `http://localhost:3001/ads`;
+    let url;
+    console.log(query);
+    // const newQuery = {...query, ...{take: limit}, ...{skip: skip}};
+    if (query.type === 'All' || !query.type) {
+      url =
+    `http://localhost:3000/ads`;
+    } else {
+       url =
+      `http://localhost:3000/ads?type=${query.type}`;
+    }
     this.httpClient.get<any[]>(
       url,
     {
       observe: 'body',
       responseType: 'json',
-      params: newQuery,
+      // params: newQuery,
 
     })
     .map(
@@ -102,23 +110,26 @@ export class DataStorageService {
     )
     .subscribe(
         (ads: any) => {
-        const newAds = ads[0];
+        console.log(ads);
+        const newAds = ads;
         this.adsService.setAds(newAds);
-        const pager = this.paginationService.getPager( ads[1], page);
+        const pager = this.paginationService.getPager( ads.length, page);
         this.adsService.pagination(pager);
         }
       );
   }
   addNewUser(formValue): Observable<any> {
-    const result = this.httpClient.post<any>(`http://localhost:3001/user`, formValue, httpOptions);
+    let userForm = formValue;
+    userForm.id = new Date();
+    const result = this.httpClient.post<any>(`http://localhost:3000/auth`, userForm, httpOptions);
      return result;
   }
   loginUser(formValue): Observable<any> {
-    const result = this.httpClient.post<any>(`http://localhost:3001/user/login`, formValue, httpOptions);
+    const result = this.httpClient.get<any>(`http://localhost:3000/auth?login=${formValue.login}`, httpOptions);
      return result;
   }
   getCurrentAds(id: number) {
-    const url = `http://localhost:3001/ads/${id}`;
+    const url = `http://localhost:3000/ads/${id}`;
     return this.httpClient.get<any>(
      url,
     {
@@ -129,14 +140,14 @@ export class DataStorageService {
     }
   getCurrentMessage(id: number) {
     return this.httpClient.get<any>(
-      `http://localhost:3001/message/${id}`,
+      `http://localhost:3000/message/${id}`,
     {
       observe: 'body',
       responseType: 'json',
    });
   }
   getAdsbyUserId(id: number) {
-    const url = `http://localhost:3001/ads/userAds/${id}`;
+    const url = `http://localhost:3000/ads/userAds/${id}`;
     return this.httpClient.get<any[]>(
       url,
       {
@@ -147,7 +158,7 @@ export class DataStorageService {
   }
   getTypesFilter() {
 
-    this.httpClient.get<Types[]>('http://localhost:3001/types',
+    this.httpClient.get<Types[]>('http://localhost:3000/types',
     {
       observe: 'body',
       responseType: 'json',
@@ -167,12 +178,12 @@ export class DataStorageService {
       );
   }
   postMessage(message: any) {
-   const result =  this.httpClient.post<any>(`http://localhost:3001/message`, message, httpOptions);
+   const result =  this.httpClient.post<any>(`http://localhost:3000/message`, message, httpOptions);
    return result;
   }
   getMessage(id: number) {
     this.httpClient.get<any[]>(
-      `http://localhost:3001/message?id=${id}`,
+      `http://localhost:3000/message?id=${id}`,
     {
       observe: 'body',
       responseType: 'json',

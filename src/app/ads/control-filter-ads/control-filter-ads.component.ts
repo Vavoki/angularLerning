@@ -21,7 +21,6 @@ export class ControlFilterAdsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    console.log(this.rout.snapshot.queryParams.id);
     if (this.rout.snapshot.queryParams.id) {
       this.hide = true;
     }

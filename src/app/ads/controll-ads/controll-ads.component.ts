@@ -35,7 +35,6 @@ export class ControllAdsComponent implements OnInit, OnDestroy {
               }
   ngOnInit() {
     this.title = this.rout.snapshot.queryParams.title;
-    console.log(this.title);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

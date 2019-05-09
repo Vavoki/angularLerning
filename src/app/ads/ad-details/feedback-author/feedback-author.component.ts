@@ -25,7 +25,6 @@ export class FeedbackAuthorComponent implements OnInit, OnDestroy {
       return this.apiService.getCurrentAds(id);
     })
     .subscribe((data) => {
-      console.log(data.user.id);
       this.id = data.user.id;
     });
   }
@@ -37,7 +36,6 @@ export class FeedbackAuthorComponent implements OnInit, OnDestroy {
   }
   onSubmit(form: NgForm) {
     const message = {...form.value, ...{user: this.id}};
-    console.log(message);
     this.apiService.postMessage(message).subscribe();
   }
 }

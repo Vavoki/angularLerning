@@ -19,7 +19,6 @@ export class DetailMessageComponent implements OnInit {
       return this.apiService.getCurrentMessage(+param['id']);
     }).subscribe(
       (data) => {
-        console.log(data);
         this.message = data;
       }
     );

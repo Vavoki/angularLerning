@@ -25,7 +25,7 @@ export class AuthService {
     const formValue = {login: login, password: password};
     this.apiService.loginUser(formValue)
     .subscribe(
-      data => { this.router.navigate(['/']); this.token = data.token; this.user = data.user; },
+      data => { this.router.navigate(['/']); console.log(data); this.token = data[0].password; this.user = data[0]; },
        err => { this.errMesage = err.error.message; });
   }
   isAuth() {

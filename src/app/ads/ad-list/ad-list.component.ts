@@ -41,13 +41,11 @@ export class AdListComponent implements OnInit, OnDestroy {
             ) { }
 
 ngOnInit() {
-  console.log('initLIST');
   this.query = this.route.snapshot.queryParams;
   this.setPage(1);
   this.routeEvent = this.router.events.pipe(
         filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-        console.log('route change');
         this.query = this.route.snapshot.queryParams;
         this.apiService.getAdsOffsetLimit(0, 5, this.query);
       });

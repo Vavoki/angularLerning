@@ -3,6 +3,7 @@ import { Ads } from './ads.model';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Types } from '../shared/typesFilter.model';
+import { log } from 'util';
 
 
 @Injectable()
@@ -68,6 +69,7 @@ export class AdsService {
     this.adsChanged.next(this.ads);
   }
   getAdsbyAuth(login: string) {
+    console.log(this.ads, 'GET', login);
    const result = this.ads.filter(item => item.user.login === login);
    return result;
   }

@@ -11,11 +11,11 @@
           <p>{{ads?.description}}</p>
           <hr>
         </div>
-        <ng-template [ngIf]="imgs && imgs.length > 1">
+        <!-- <ng-template [ngIf]="imgs && imgs.length > 1">
           <div class="row">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </div>
-        </ng-template>
+        </ng-template> -->
         <hr>
         <div>
           <app-feedback-author></app-feedback-author>
@@ -50,7 +50,7 @@
             <ng-container *ngFor = "let ad of authAds; let i = index">
                 <a routerLink = "/ads/{{ad.id}}" style="cursor: pointer; text-decoration: none; color: #000;" *ngIf="i<3">
                   <div class="other-ads" style="margin-top: 5px;">
-                      <img src={{ad.imgs[0].imgPath}} style="width: 50px">
+                      <img src={{ad.imgs[0]}} style="width: 50px">
                       <span style="display: inline-block;">{{ ad.title}}</span>
                       <span style="display: block; font-size: 20px">{{ ad.price }} ГРН.</span>
                   </div>

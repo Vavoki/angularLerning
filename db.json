@@ -13,45 +13,34 @@
       "name": "Games"
     }
   ],
-  "posts": [
+  "auth": [
     {
-      "title": "PS4",
-      "description": "PS4",
-      "price": 7000,
-      "type": "GamesConsole",
-      "imgs": [
-        {
-          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537891392191vgif-ru-13169.gif?alt=media&token=4680676a-08c3-464c-bda5-77f714f7d622"
-        },
-        {
-          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537958341159boom-flash-on-white_1308-2912.jpg?alt=media&token=47ec21fe-3a65-4dae-bd65-00ef3be30075"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vladyslav",
-          "phone": "+",
-          "email": "vlad-1111@bk.ru1"
-        }
-      ],
-      "id": 31,
-      "emailAds": "vlad-1111@bk.ru1"
+      "login": "admin",
+      "password": "2331413",
+      "email": "23143s111s@gmail.com",
+      "name": "Havrylov Vladyslav",
+      "phone": [],
+      "id": "1"
     },
+    {
+      "login": "vavoki",
+      "password": "2331413",
+      "email": "23143s111s@gmail.com",
+      "name": "Havrylov Vladyslav",
+      "phone": [],
+      "id": "2019-05-09T11:30:11.063Z"
+    }
+  ],
+  "ads": [
     {
       "title": "PS4 Slim",
       "description": "trewq",
       "price": 5000,
       "type": "GamesConsole",
       "imgs": [
-        {
-          "imgPath": "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$"
-        },
-        {
-          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537882017731PS4-Console-wDS4.png?alt=media&token=398ff167-6c75-4b66-9b6c-708b13016f01"
-        },
-        {
-          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537957442370boom-flash-on-white_1308-2912.jpg?alt=media&token=3f3723d9-5bd6-47de-bd85-fb87e2719daa"
-        }
+        "https://psmedia.playstation.com/is/image/psmedia/ps4-slim-jet-black-product-grid-01-au-24jan17?$Icon$",
+        "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537882017731PS4-Console-wDS4.png?alt=media&token=398ff167-6c75-4b66-9b6c-708b13016f01",
+        "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537957442370boom-flash-on-white_1308-2912.jpg?alt=media&token=3f3723d9-5bd6-47de-bd85-fb87e2719daa"
       ],
       "contact": [
         {
@@ -61,27 +50,11 @@
         }
       ],
       "id": 32,
-      "emailAds": "vlad-1111@bk.ru1"
-    },
-    {
-      "title": "WOOW",
-      "description": "asdfdasf",
-      "price": 2132,
-      "type": "Games",
-      "imgs": [
-        {
-          "imgPath": "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1537958846827boom-flash-on-white_1308-2912.jpg?alt=media&token=094465e6-6dbd-4b96-808a-1c51d83b425e"
-        }
-      ],
-      "contact": [
-        {
-          "name": "Vlad",
-          "phone": "+",
-          "email": "vlad-1111@bk.ru2"
-        }
-      ],
-      "id": 33,
-      "emailAds": "vlad-1111@bk.ru2"
+      "emailAds": "vlad-1111@bk.ru1",
+      "user": {
+        "login": "admin",
+        "name": "Vlad"
+      }
     },
     {
       "title": "WOOW",
@@ -89,9 +62,7 @@
       "price": 1111,
       "type": "Games",
       "imgs": [
-        {
-          "imgPath": "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
-        }
+        "https://thumb7.shutterstock.com/display_pic_with_logo/3903479/434910754/stock-vector-woow-comic-speech-bubble-cartoon-434910754.jpg"
       ],
       "contact": [
         {
@@ -101,7 +72,40 @@
         }
       ],
       "id": 35,
-      "emailAds": "vlad-1111@bk.ru2"
+      "emailAds": "vlad-1111@bk.ru2",
+      "user": {
+        "login": "admin",
+        "name": "Vlad"
+      }
+    },
+    {
+      "title": "PS4",
+      "description": "Loren Ispum",
+      "price": 12000,
+      "type": "GamesConsole",
+      "imgs": [
+        "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1557402355183download.jpg?alt=media&token=5f1292f4-a3e4-47ce-a0a7-f4fa4ed9128c"
+      ],
+      "user": "1",
+      "id": 36
+    },
+    {
+      "title": "ps4",
+      "description": "loren Inpum",
+      "price": 12,
+      "type": "GamesConsole",
+      "imgs": [
+        "https://firebasestorage.googleapis.com/v0/b/ngeducationalproject.appspot.com/o/uploads%2F1557403338350download.jpg?alt=media&token=23bedefb-1588-4c6d-b2e4-d2f978804a68"
+      ],
+      "user": {
+        "login": "admin",
+        "password": "2331413",
+        "email": "23143s111s@gmail.com",
+        "name": "Havrylov Vladyslav",
+        "phone": [],
+        "id": "1"
+      },
+      "id": 37
     }
   ]
 }
