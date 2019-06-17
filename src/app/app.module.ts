@@ -54,7 +54,12 @@ import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
     routing,
     ModalGalleryModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    Angulartics2Module.forRoot(),
+    Angulartics2Module.forRoot({
+      pageTracking: {
+        clearHash: true,
+        clearQueryParams: true,
+      }
+    }),
     Angulartics2RouterlessModule.forRoot(),
   ],
   providers: [
