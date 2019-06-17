@@ -8,8 +8,26 @@
             </ul>
             <ul class="nav navbar-nav navbar-right" [@fade]>
               <ng-template [ngIf]="!authService.isAuth()"  >
-                <li routerLinkActive="active"><a routerLink="/singup">Sign Up</a></li>
-                <li routerLinkActive="active"><a routerLink="/singin">Sign In</a></li>
+                <li routerLinkActive="active">
+                  <a 
+                    routerLink="/singup" 
+                    angulartics2On="click" 
+                    angularticsAction="SignUp" 
+                    [angularticsCategory]="SingUp"
+                  >
+                  Sign Up
+                  </a>
+                </li>
+                <li routerLinkActive="active">
+                  <a 
+                    routerLink="/singin"
+                    angulartics2On="click" 
+                    angularticsAction="SignIn" 
+                    [angularticsCategory]="SingIn"
+                  >
+                  Sign In
+                  </a>
+                </li>
               </ng-template>
               <ng-template [ngIf]="authService.isAuth()"> 
                 <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/profile">{{authService.user.login}}</a></li>

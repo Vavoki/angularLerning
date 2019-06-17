@@ -29,7 +29,9 @@ import { MessageComponent } from './profile/message/message.component';
 import { CurrentMessageComponent } from './profile/message/current-message/current-message.component';
 import { MessageService } from './profile/message.service';
 import { DetailMessageComponent } from './profile/message/detail-message/detail-message.component';
-
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { DetailMessageComponent } from './profile/message/detail-message/detail-
     routing,
     ModalGalleryModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
+    Angulartics2Module.forRoot(),
+    Angulartics2RouterlessModule.forRoot(),
   ],
   providers: [
     UploadService,

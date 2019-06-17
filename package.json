@@ -27,6 +27,7 @@
     "@types/mousetrap": "^1.6.0",
     "angular-modal-gallery": "^5.7.1",
     "angular2-text-mask": "^9.0.0",
+    "angulartics2": "^7.5.2",
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
     "dev": "^0.1.3",

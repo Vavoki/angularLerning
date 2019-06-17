@@ -26,6 +26,7 @@ import { FeedbackAuthorComponent } from './ad-details/feedback-author/feedback-a
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../environments/environment';
+import { Angulartics2Module } from 'angulartics2';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { environment } from '../../environments/environment';
     NgxGalleryModule,
     NgxSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase),
+    Angulartics2Module,
   ]
 })
 export class AdsModule {
